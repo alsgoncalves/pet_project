@@ -13,6 +13,7 @@ class OrganizationsController < ApplicationController
      #   lng: organization.longitude
      # }
     #end
+    @organizations = Organization.all
   end
 
   def show
@@ -64,5 +65,4 @@ class OrganizationsController < ApplicationController
   def organization_params
     params.require(:organization).permit(:name, :address, :phone_number, :email, :category, :description, :city, :zip_code, :country)
   end
-
 end

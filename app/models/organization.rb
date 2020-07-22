@@ -1,5 +1,6 @@
 class Organization < ApplicationRecord
   has_many :admin
+  has_many :posts, dependent: :destroy
 
   validates :name,          presence: true, length: { minimum: 2 }
   validates :address,       presence: true, length: { minimum: 2 }
@@ -10,6 +11,4 @@ class Organization < ApplicationRecord
   validates :city,          presence: true, length: { minimum: 2 }
   validates :zip_code,      presence: true, length: { minimum: 2 }
   validates :country,       presence: true, length: { minimum: 2 }
-
-
 end
