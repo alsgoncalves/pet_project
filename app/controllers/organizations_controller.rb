@@ -30,7 +30,7 @@ class OrganizationsController < ApplicationController
     # authorize @organization
 
     @organization.save!
-    @admin = Admin.new()
+    @admin = Admin.new
     @admin.user_id = current_user.id
     @admin.organization_id = @organization.id
     @admin.can_edit = true
@@ -63,6 +63,6 @@ class OrganizationsController < ApplicationController
   private
 
   def organization_params
-    params.require(:organization).permit(:name, :address, :phone_number, :email, :category, :description, :city, :zip_code, :country)
+    params.require(:organization).permit(:name, :address, :phone_number, :email, :category, :description, :city, :zip_code, :country, photos: [])
   end
 end

@@ -1,6 +1,7 @@
 class Organization < ApplicationRecord
   has_many :admin
   has_many :posts, dependent: :destroy
+  has_many_attached :photos
 
   validates :name,          presence: true, length: { minimum: 2 }
   validates :address,       presence: true, length: { minimum: 2 }
