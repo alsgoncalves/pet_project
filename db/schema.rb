@@ -71,6 +71,16 @@ ActiveRecord::Schema.define(version: 2020_07_22_201618) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_participations_on_event_id"
     t.index ["user_id"], name: "index_participations_on_user_id"
+
+  create_table "posts", force: :cascade do |t|
+    t.text "description"
+    t.string "location"
+    t.date "date"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
+    t.index ["organization_id"], name: "index_posts_on_organization_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -92,6 +102,7 @@ ActiveRecord::Schema.define(version: 2020_07_22_201618) do
   add_foreign_key "admins", "organizations"
   add_foreign_key "admins", "users"
   add_foreign_key "events", "organizations"
+  add_foreign_key "posts", "organizations"
   add_foreign_key "favourites", "organizations"
   add_foreign_key "favourites", "users"
   add_foreign_key "participations", "events"

@@ -1,2 +1,8 @@
 <h1>Organization#index</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+ <% @organizations.each do |organization| %>
+   <%= link_to organization.name, organization_path(organization) %>
+   <%= organization.description %>
+   <%= organization.city %>
+ <% end %>

@@ -1,0 +1,10 @@
+
+
+
+
+<%= link_to "+ Create a new post", new_organization_post_path(@organization) %>
+
+<% @organization.posts.each do |post| %>
+<%= post.title %>
+<%= post.description %>
+<% end %>
