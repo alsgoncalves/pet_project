@@ -101,10 +101,12 @@ ActiveRecord::Schema.define(version: 2020_07_22_201618) do
 
   add_foreign_key "admins", "organizations"
   add_foreign_key "admins", "users"
+
   add_foreign_key "events", "organizations"
   add_foreign_key "posts", "organizations"
   add_foreign_key "favourites", "organizations"
   add_foreign_key "favourites", "users"
   add_foreign_key "participations", "events"
   add_foreign_key "participations", "users"
+
 end
