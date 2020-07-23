@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2020_07_22_100129) do
 
   add_foreign_key "admins", "organizations"
   add_foreign_key "admins", "users"
-  add_foreign_key "posts", "organizations"
   add_foreign_key "favourites", "organizations"
   add_foreign_key "favourites", "users"
+  add_foreign_key "posts", "organizations"
 end
