@@ -1,5 +1,7 @@
 class Organization < ApplicationRecord
-  has_many :admin
+  has_many :admins
+  has_many :favourites
+  has_many :events
   has_many :posts, dependent: :destroy
 
   validates :name,          presence: true, length: { minimum: 2 }
