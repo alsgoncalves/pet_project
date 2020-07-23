@@ -1,5 +1,9 @@
 class Organization < ApplicationRecord
   has_many :admins
+
+  has_many :favourites
+  has_many :events
+
   has_many :posts, dependent: :destroy
   has_many_attached :photos
 
