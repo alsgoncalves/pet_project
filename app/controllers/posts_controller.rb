@@ -5,14 +5,19 @@ class PostsController < ApplicationController
   end
 
   def create
+    # TODO: move this validation later to pundit
     @organization = Organization.find(params[:organization_id])
-    @post = Post.new(post_params)
-    @post.organization = @organization
-    if @post.save
+
+    current_user_admin = @organization.find_admin(current_user)
+
+    if current_user_admin != nil && current_user_admin.can_add_posts
+      @post = Post.new(post_params)
+      @post.organization = @organization 
+      @post.save!
+      flash[:notice] = 'Upload successful'
       redirect_to organization_path(@organization)
-      flash[:notice] = 'Upload successful.'
     else
-      render :new
+      flash[:alert] = "You are not allowed to perform this action"
     end
   end
 
