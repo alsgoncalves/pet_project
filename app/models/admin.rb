@@ -7,5 +7,4 @@ class Admin < ApplicationRecord
   validates :can_add_posts,           presence: true
   validates :can_add_admin,           presence: true
   validates :is_owner,                presence: true
-
 end
