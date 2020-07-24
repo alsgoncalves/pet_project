@@ -1,9 +1,65 @@
-<%= simple_form_for @admin do |f| %>
-  <%= f.input :email, prepend: "example-", append: "@gmail.com" %>
-  <%= f.input :can_edit, as: :check_boxes %>
-  <%= f.input :can_add_events, as: :check_boxes %>
-  <%= f.input :can_add_posts, as: :check_boxes %>
-  <%= f.input :can_add_admins, as: :check_boxes %>  
-  <%= f.button :submit, class: "btn-primary" %>
-  <%= f.button :button, "Cancel", type: "reset", class: "btn-outline-secondary" %>
-<% end %>
+
+ <%  if @admin.organization_id  != nil %>
+   #<h2> Add a new Admin to your organization<h2>
+   #<form>
+   #  <label for="user.email">Email:</label>
+   #    <% @users.each do |user| %>
+   #      <input type="text" id="user.email" name="user.email"><br>
+   #    <% end %>
+   #  <br/>
+   #  <label for="can_add_admins">This user can add other admins</label>
+   #  <input type="checkbox" id="can_add_admins" name="can_add_admins" value="1">
+   #  <label for="can_add_events">This user can add events</label>
+   #  <input type="checkbox" id="can_add_events" name="can_add_events">
+   #  <label for="can_add_posts">This user can add posts</label>
+   #  <input type="checkbox" id="can_add_posts" name="can_add_posts">
+   #  <input type="submit" value="Submit">
+   #<form>
+ <% end %>  
+
+<form>
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+    </div>
+  </div>
+  <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm-2 pt-0">New Admin can: </legend>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+          <label class="form-check-label" for="gridRadios1">
+            Add events
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+          <label class="form-check-label" for="gridRadios2">
+            Add posts
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+          <label class="form-check-label" for="gridRadios3">
+            Can edit <%= @organization.name%> details
+          </label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="customCheck1">
+          <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="customCheck1">
+          <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </div>
+  </div>
+</form>
