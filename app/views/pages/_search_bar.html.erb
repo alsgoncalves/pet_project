@@ -1,0 +1,11 @@
+<%= form_tag organizations_path, method: :get, class: "search-bar" do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Type a location to find an organization near you"
+  %>
+  <%= hidden_field_tag :latitude, '', id: 'search_lat' %>
+  <%= hidden_field_tag :longitude, '', id: 'search_lng' %>
+  <%= submit_tag "Search" %>
+<% end %>
+

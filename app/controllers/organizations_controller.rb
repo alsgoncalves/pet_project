@@ -13,7 +13,11 @@ class OrganizationsController < ApplicationController
      #   lng: organization.longitude
      # }
     #end
-    @organizations = Organization.all
+    if params[:latitude].present? && params[:longitude].present?
+      @organizations = Organization.near(params[:latitude], params[:longitude], 30)
+    else
+      @organizations = Organization.all
+    end
   end
 
   def show

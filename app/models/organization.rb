@@ -1,8 +1,11 @@
 class Organization < ApplicationRecord
+  geocoded_by :address
+  geocoded_by :full_address
+  after_validation :geocode
   has_many :admins
 
   has_many :favourites
-  has_many :events
+  has_many :events, dependent: :destroy
 
   has_many :posts, dependent: :destroy
   has_many_attached :photos
@@ -22,5 +25,9 @@ class Organization < ApplicationRecord
       admin.user_id == user.id
     }
     return current_user_admin
+  end
+
+  def full_address
+    [:address, :city, :zip_code, :country].compact.join(', ')
   end
 end

@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Organization.destroy_all
 
 Organization.create(
   name: "CASA - Centro de Apoio ao Sem-Abrigo",
