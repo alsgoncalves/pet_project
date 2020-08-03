@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2020_07_23_133915) do
+ActiveRecord::Schema.define(version: 2020_08_03_090657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +84,8 @@ ActiveRecord::Schema.define(version: 2020_07_23_133915) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_deleted", default: false, null: false
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "participations", force: :cascade do |t|
@@ -126,12 +127,10 @@ ActiveRecord::Schema.define(version: 2020_07_23_133915) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "admins", "organizations"
   add_foreign_key "admins", "users"
-
   add_foreign_key "events", "organizations"
   add_foreign_key "favourites", "organizations"
   add_foreign_key "favourites", "users"
   add_foreign_key "participations", "events"
   add_foreign_key "participations", "users"
-
   add_foreign_key "posts", "organizations"
 end
