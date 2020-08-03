@@ -10,6 +10,15 @@ class Organization < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
 
+  reverse_geocoded_by :latitude, :longitude do |organization, results|
+    if geo = results.first
+      organization.city     = geo.city
+      organization.zip_code = geo.postal_code
+      organization.country  = geo.country
+    end
+  end
+  after_validation :reverse_geocode
+
   validates :name,          presence: true, length: { minimum: 2 }
   validates :address,       presence: true, length: { minimum: 2 }
   validates :phone_number,  presence: true, length: { minimum: 2 }
