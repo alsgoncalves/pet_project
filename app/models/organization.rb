@@ -10,13 +10,14 @@ class Organization < ApplicationRecord
   # Model validations
   validates :name,          presence: true, length: { minimum: 2 }
   validates :address,       presence: true, length: { minimum: 2 }
+  validates :city,          presence: true, length: { minimum: 2 }
   validates :phone_number,  presence: true, length: { minimum: 9 }
   validates :email,         presence: true, length: { minimum: 2 } # Missing the Regex validation
-  validates :category,      presence: true, length: { minimum: 2 } # Provide a list to choose from
+  validates :category,      presence: true, length: { minimum: 2 } # Provides a list to choose from
   validates :description,   presence: true, length: { minimum: 5 }
 
-  # Get the Organization's coordinates based on the address the user provides
-  geocoded_by :address
+  # Get the Organization's coordinates based on the address and city provided by the user
+  geocoded_by :full_address
   after_validation :geocode, if: :will_save_change_to_address?
 
   # Get the city, zip_code and country based on the coordinates
@@ -28,6 +29,12 @@ class Organization < ApplicationRecord
     end
   end
   after_validation :reverse_geocode
+
+  # Creates a more complete adress from the input provide by the user
+  # Only meant to be used in Portugal
+  def full_address
+    [address, city, "Portugal"].compact.join(', ')
+  end
 
   # Gets the user that is the Organization's admin
   # There's a single admin per Organization

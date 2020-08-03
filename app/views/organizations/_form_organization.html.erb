@@ -12,10 +12,6 @@
   <%= f.input :email %>
   <%= f.input :address %>
   <%= f.input :city %>
-  <%= f.input :zip_code %>
-  <%= f.input :country, :collection => [
-     'Portugal'
-  ] %>
   <%= f.input :photos, as: :file, input_html: { multiple: true } %>
   <%= f.button :submit, class: "form-btn" %>
 <% end %>
