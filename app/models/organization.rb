@@ -7,6 +7,9 @@ class Organization < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many_attached :photos
 
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
+
   validates :name,          presence: true, length: { minimum: 2 }
   validates :address,       presence: true, length: { minimum: 2 }
   validates :phone_number,  presence: true, length: { minimum: 2 }
