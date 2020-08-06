@@ -6,14 +6,67 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Organization.create(
-  name: "CASA - Centro de Apoio ao Sem-Abrigo",
-  address: "Rua Ladislau Parreira, 22",
-  phone_number: "Susana Marques - 914 222 377",
-  email: "setubal@casa-apoioaosemabrigo.org",
-  category: "Sem-Abrigo",
-  description: "Auxiliar aqueles que se encontram em situação de Sem-Abrigo, que integrem Famílias em Risco ou Famílias Carênciadas, através de ações de solidariedade social, disponibilizando um contacto próximo, bens alimentares, artigos de vestuário e serviços de reintegração social, independentemente do estrato social, etnia, religião ou género.",
-  city: "Setúbal",
-  zip_code: "2900-174",
-  country: "Portugal"
-  )
+require 'faker'
+require 'open-uri'
+
+users_to_create = 10
+
+puts 'Creating Users ...'
+
+users_to_create.times do
+  User.create(first_name: Faker::Name.first_name,
+             last_name: Faker::Name.last_name,
+             email: Faker::Internet.email,
+             password: '123123',
+             address: Faker::Address.city,
+             phone_number: Faker::PhoneNumber.cell_phone)
+end
+
+puts "Users created: #{User.all.count}"
+
+organizations_photos_url = [
+  'https://images.unsplash.com/photo-1562157646-4303261af91e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80',
+  'https://images.unsplash.com/photo-1573407947625-124549936954?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80',
+  'https://images.unsplash.com/photo-1554244933-d876deb6b2ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80',
+  'https://images.unsplash.com/photo-1592106680408-e7e63efbc7ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80',
+  'https://images.unsplash.com/photo-1569385210018-127685230669?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80',
+  'https://images.unsplash.com/photo-1521510186458-bbbda7aef46b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80',
+  'https://images.unsplash.com/flagged/photo-1576784188474-db03a2d80fca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80',
+  'https://images.unsplash.com/photo-1584060713648-8f1cc8fc1e5a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80',
+  'https://images.unsplash.com/photo-1564974944378-7f6b56fea4a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80',
+  'https://images.unsplash.com/photo-1588959570984-9f1e0e9a91a6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80',
+  'https://images.unsplash.com/photo-1571115355423-1d318bd95e22?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80'
+  ]
+
+puts 'Creating organizations ...'
+organizations_photos_url.each do |url|
+  org = Organization.new(name: Faker::Company.name,
+                      address: Faker::Address.street_address,
+                      email: Faker::Internet.email,
+                      phone_number: Faker::PhoneNumber.cell_phone,
+                      description: Faker::Lorem.paragraph,
+                      category: "Others",
+                      city: Faker::Address.city,
+                      zip_code: Faker::Address.zip_code,
+                      country: Faker::Address.country)
+
+  file = URI.open(url)
+  org.photos.attach(io: file, filename: 'nes.png', content_type: 'image/png')
+
+  puts "Creating #{org.name} ..."
+  org.save!
+
+  admin = Admin.new(user: User.all.sample, 
+      organization: org, 
+      can_edit: true,
+      can_add_posts: true,
+      can_add_events: true,
+      can_add_admin: true,
+      is_owner: true)
+
+  puts "Linking user #{admin.user.email} to #{admin.organization.name} as owner ..."
+  admin.save!
+end
+
+puts "Organizations created: #{Organization.all.count}"
+puts "Finished!"
