@@ -1,54 +1,52 @@
 
 <!-- POSTS -->
-
-<div>
-  <%= link_to "+ Create a new post", new_organization_post_path(@organization) %>
-</div>
-
-<div class="card-container d-flex">
-  <% @organization.posts.each do |post| %>
-    <div class="card-wrapper">
-      <div class="card-header">
-        <%= post.title %>
-      </div>
-      <div class="card-body">
-        <%= post.description %>
-      </div>
-      <div class="card-buttons">
-        <%= link_to "Update", edit_organization_post_path(@organization, post), class: "btn btn-success" %>
-        <%= link_to 'Delete', organization_post_path(@organization, post),
-              method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
-      </div>
+<div class="container p-5">
+    <div>
+      <%= link_to "+ Create a new post", new_organization_post_path(@organization) %>
     </div>
-  <% end %>
-</div>
 
-<!-- EVENTS -->
-<br>
-<br>
-<div>
-  <%= link_to "+ Create a new event", new_organization_event_path(@organization) %>
-</div>
-
-<div class="card-container d-flex">
-  <% @organization.events.each do |event| %>
-    <div class="card-wrapper">
-      <div class="card-header">
-      <%= event.title %>
-      </div>
-      <div class="card-body">
-        <%= event.description %>
-        <%= event.part_count %>
-      </div>
-      <div class="card-buttons">
-        <%= link_to "Update", edit_organization_event_path(@organization, event), class: "btn btn-success" %>
-        <%= link_to 'Delete', organization_event_path(@organization, event),
-              method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
-      </div>
+    <div class="card-container d-flex">
+      <% @organization.posts.each do |post| %>
+        <div class="card-wrapper">
+          <div class="card-header">
+            <%= post.title %>
+          </div>
+          <div class="card-body">
+            <%= post.description %>
+          </div>
+          <div class="card-buttons">
+            <%= link_to "Update", edit_organization_post_path(@organization, post), class: "btn btn-success" %>
+            <%= link_to 'Delete', organization_post_path(@organization, post),
+                  method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-</div>
 
+    <!-- EVENTS -->
+    <br>
+    <br>
+    <div>
+      <%= link_to "+ Create a new event", new_organization_event_path(@organization) %>
+    </div>
 
-
- <%= link_to "+ Add an Admin to your organization", new_organization_admin_path(@organization) %>
+        <div class="card-container d-flex">
+          <% @organization.events.each do |event| %>
+            <div class="card-wrapper">
+              <div class="card-header">
+              <%= event.title %>
+              </div>
+              <div class="card-body">
+                <%= event.description %>
+                <%= event.part_count %>
+              </div>
+              <div class="card-buttons">
+                <%= link_to "Update", edit_organization_event_path(@organization, event), class: "btn btn-success" %>
+                <%= link_to 'Delete', organization_event_path(@organization, event),
+                      method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <%= link_to "+ Add an Admin to your organization", new_organization_admin_path(@organization) %>
+</div>        

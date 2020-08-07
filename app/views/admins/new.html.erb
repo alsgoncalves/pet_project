@@ -1,9 +1,18 @@
-<%= simple_form_for @admin do |f| %>
-  <%= f.input :email, prepend: "example-", append: "@gmail.com" %>
-  <%= f.input :can_edit, as: :check_boxes %>
-  <%= f.input :can_add_events, as: :check_boxes %>
-  <%= f.input :can_add_posts, as: :check_boxes %>
-  <%= f.input :can_add_admins, as: :check_boxes %>  
-  <%= f.button :submit, class: "btn-primary" %>
-  <%= f.button :button, "Cancel", type: "reset", class: "btn-outline-secondary" %>
+<%= form_with(url: organization_admins_path, method: "post") do %>
+  <%= label_tag(:email, "User Email:") %>
+  <%= email_field_tag(:email) %>
+  <br/>
+  <%= check_box_tag(:can_edit) %>
+  <%= label_tag(:can_edit, "Can Edit") %>
+ <br/>
+  <%= check_box_tag(:can_add_events) %>
+  <%= label_tag(:can_edit, "Can Add Events") %>
+ <br/>
+  <%= check_box_tag(:can_add_posts) %>
+  <%= label_tag(:can_edit, "Can Add Posts") %>
+ <br/>
+  <%= check_box_tag(:can_add_admins) %>
+  <%= label_tag(:can_edit, "Can Add Admins") %>
+ <br/>
+  <%= submit_tag("Save") %> 
 <% end %>
