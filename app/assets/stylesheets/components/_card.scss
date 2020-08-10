@@ -94,3 +94,19 @@ a{
   color: white;
   font-family: courier, sans;
 }
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.card {
+  // border: 1px solid black;
+  text-align: center;
+  margin: 10px;
+  width: 30vw;
+  img {
+    // width: 90vw;
+  }
+}

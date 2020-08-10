@@ -1,4 +1,45 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<br>
+<br>
+<br>
 
-<%= render "search_bar" %>
+<!-- BANNER -->
+
+<div class="banner">
+  <div class="banner-container">
+    <h1>Do you want to give back to your community?</h1>
+    <h4>Find organizations nearby that you can help!</h4>
+    <%= render "search_bar" %>
+  </div>
+</div>
+
+<!-- CARDS CONTAINER -->
+
+<div class="cards-container">
+  <div class="card">
+    <div class="card-image">
+      <%= image_tag('h-donate.png') %>
+    </div>
+    <div class="card-text">
+      <h4>Donate</h4>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-image">
+      <%= image_tag('h-volunteer.png') %>
+    </div>
+    <div class="card-text">
+      <h4>Volunteer</h4>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-image">
+      <%= image_tag('h-be-informed.png') %>
+    </div>
+    <div class="card-text">
+      <h4>Keep up to date</h4>
+    </div>
+  </div>
+</div>
+
+
+
