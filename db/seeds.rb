@@ -66,7 +66,36 @@ organizations_photos_url.each do |url|
 
   puts "Linking user #{admin.user.email} to #{admin.organization.name} as owner ..."
   admin.save!
+
+  posts = Post.new(organization: Organization.all.sample,
+                    organization: org,
+                    title: Faker::Company.name,
+                    date: Faker::Date.backward(days: 14),
+                    description: Faker::Lorem.paragraph,
+                    location: Faker::Address.street_address)
+
+  puts "Creating posts: #{posts.title} to #{posts.organization.name}..."
+  posts.save
+
+  puts "Posts: #{Post.all.count}"
+
+  events = Event.new(organization: Organization.all.sample,
+                  organization: org,
+                  title: Faker::BossaNova.song,
+                  date: Faker::Date.forward(days: 10),
+                  description: Faker::Lorem.paragraph,
+                  location: Faker::Address.street_address,
+                  part_count: Faker::Number.between(from: 1, to: 100))
+
+  puts "Creating events: #{events.title} to #{events.organization.name}..."
+  events.save
+
+  puts "Events: #{Event.all.count}"
+
 end
 
+
 puts "Organizations created: #{Organization.all.count}"
+
+
 puts "Finished!"

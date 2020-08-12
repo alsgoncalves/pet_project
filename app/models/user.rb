@@ -17,24 +17,28 @@ class User < ApplicationRecord
     !admin.nil?
   end
 
-  def admin_can_edit?(organization_id)
-    admin = find_admin_for(organization_id)
+  def can_edit?(organization)
+    admin = find_admin_for(organization.id)
     !admin.nil? && admin.can_edit
   end
 
-  def admin_can_add_events?(organization_id)
-    admin = find_admin_for(organization_id)
+  def can_add_events_for?(organization)
+    admin = find_admin_for(organization.id)
     !admin.nil? && admin.can_add_events
   end
 
-  def admin_can_add_posts?(organization_id)
-    admin = find_admin_for(organization_id)
+  def can_add_posts_for?(organization)
+    admin = find_admin_for(organization.id)
     !admin.nil? && admin.can_add_posts
   end
 
-  def admin_can_add_admin?(organization_id)
-    admin = find_admin_for(organization_id)
+  def can_add_admin_to?(organization)
+    admin = find_admin_for(organization.id)
     !admin.nil? && admin.can_add_admin
   end
 
+  def is_owner?(organization)
+    admin = find_admin_for(organization.id)
+    !admin.nil? && admin.is_owner
+  end
 end

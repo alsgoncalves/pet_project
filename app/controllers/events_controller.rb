@@ -16,6 +16,12 @@ class EventsController < ApplicationController
     end
   end
 
+  def show
+    @organization = Organization.find(params[:organization_id])
+    @authorize event
+    @events = Event.all
+  end
+
   def edit
     @organization = Organization.find(params[:organization_id])
     @event = Event.find(params[:id])

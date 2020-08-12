@@ -3,6 +3,7 @@ class AdminsController < ApplicationController
   def new
     @organization = Organization.find(params[:organization_id])
     @admin = Admin.new
+    authorize @admin
   end
 
   def create
@@ -22,6 +23,7 @@ class AdminsController < ApplicationController
 
     # Create an admin entry between the user and the organization.
     @admin = Admin.new
+    authorize @admin
     @admin.user_id = @candidate_user.id
     @admin.organization_id = @organization.id
 
@@ -38,9 +40,14 @@ class AdminsController < ApplicationController
   def show
     organization = Organization.find(params[:organization_id])
     @admins = organization.admins
+    authorize @admin
   end
 
   def edit
+    organization = Organization.find(params[:organization_id])
+    @admins = organization.admins
+    authorize @admin
+
   end
 
   def update
