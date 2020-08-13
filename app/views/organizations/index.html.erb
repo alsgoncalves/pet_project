@@ -17,10 +17,10 @@
 				<% if organization.photos.attached? %>
 					<%= cl_image_tag organization.photos[0].key, class: "card-img-top" %>
 					<div class="card-body">
-						<h5 class="card-title"><%= link_to organization.name, organization_path(organization) %></h5>
-						<p class="card-text"><%= organization.description %></p>
+						<h5 class="card-title card-org-name"><%= link_to organization.name, organization_path(organization) %></h5>
+						<p class="card-text card-org-description"><%= truncate(organization.description, :length => 60) %></p>
+						<%= link_to "Read More", organization_path(organization),  class: "button-card-org" %>
 				<% end %>
-					<%#= link_to organization.name, organization_path(organization)  class="btn btn-primary" %>
 			</div>
 		</div>	
 	</div>

@@ -1,14 +1,17 @@
 class EventsController < ApplicationController
   def new
     @organization = Organization.find(params[:organization_id])
+    authorize @organization, :new_event?
     @event = Event.new
   end
 
   def create
     @organization = Organization.find(params[:organization_id])
+    authorize @organization, :new_event?
+
     @event = Event.new(event_params)
     @event.organization = @organization
-    if @event.save
+    if @event.save!
       redirect_to organization_path(@organization)
       flash[:notice] = 'Upload successful.'
     else
@@ -18,7 +21,6 @@ class EventsController < ApplicationController
 
   def show
     @organization = Organization.find(params[:organization_id])
-    @authorize event
     @events = Event.all
   end
 

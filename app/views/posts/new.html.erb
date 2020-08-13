@@ -1,6 +1,6 @@
 <%= simple_form_for [@organization, @post] do |f| %>
   <%= f.input :title, label: "Title" %>
-  <%= f.input :description, label: "Description"%>
+  <%= f.input :description, label: "Description", as: :trix_editor %>
   <%= f.input :location, label: "Please insert location if applicable" %>
   <%= f.input :date, label: "Please insert post end date if applicable" %>
   <%= f.button :submit, "Upload" %>
