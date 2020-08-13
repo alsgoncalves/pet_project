@@ -1,10 +1,10 @@
-<div style="display: flex; align-items: center">
+<div style="display: flex; justify-content: center">
   <div style="width: 180px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
     <div style="display: flex; flex-direction: column; align-items: center; padding: 10px 5px; border-bottom: 1px solid rgb(180, 180, 180)">
       <img src="https://cdn1.vectorstock.com/i/1000x1000/23/70/man-avatar-icon-flat-vector-19152370.jpg" alt="user avatar"
         class="avatar-large" style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
 
-      <h5 style="font-weight: 600; margin-top: 12px"><%= @name %></h5>
+      <h2 style="font-weight: 600; font-size: 18px; margin-top: 12px"><%= @name %></h2>
     </div>
 
     <div style="padding: 10px 5px; border-bottom: 1px solid rgb(180, 180, 180)">
@@ -37,5 +37,28 @@
         </div>
       <% end %>
     <% end %>
+  </div>
+
+  <div style="width: 240px">
+    <div style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
+      <h2 style="font-size: 22px">Add to your favourites</h2>
+
+      <% @organizations_recommended.each do |org| %>
+        <div>
+          <p><%= org.name %></p>
+        </div>
+      <% end %>
+      <a href="#">View all recommendations</a>
+    </div>
+
+    <div style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); margin-top: 10px">
+      <h2 style="font-size: 22px">Events near you</h2>
+
+      <% @near_events.each do |event| %>
+        <p><%= event.organization.name %></p>
+        <p><%= event.title %></p>
+        <p><%= event.date %></p>
+      <% end %>
+    </div>
   </div>
 </div>

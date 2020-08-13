@@ -13,5 +13,9 @@ class PagesController < ApplicationController
     events = organizations_followed.map { |org| org.events }.flatten
 
     @feed = (posts + events).sort_by { |x| x.created_at }
+
+    @organizations_recommended = (Organization.all - organizations_followed).first(3)
+
+    @near_events = events.first(3)
   end
 end
