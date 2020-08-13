@@ -4,9 +4,15 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def show
+    @organization = Organization.find(params[:id])
+    authorize @post
+  end
+
   def create
     # TODO: move this validation later to pundit
     @organization = Organization.find(params[:organization_id])
+    authorize @post
 
     current_user_admin = @organization.find_admin(current_user)
 
@@ -24,11 +30,13 @@ class PostsController < ApplicationController
   def edit
     @organization = Organization.find(params[:organization_id])
     @post = Post.find(params[:id])
+    authorize @post
   end
 
   def update
     @organization = Organization.find(params[:organization_id])
     @post = Post.find(params[:id])
+    authorize @post
     if @post.update(post_params)
       redirect_to organization_path(@organization)
     else
@@ -39,6 +47,7 @@ class PostsController < ApplicationController
   def destroy
     @organization = Organization.find(params[:organization_id])
     @post = Post.find(params[:id])
+    authorize @post
     @post.destroy
     redirect_to organization_path(@organization)
   end

@@ -2,42 +2,31 @@ class OrganizationsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
-    # To be implemented with the map
-    # if params[:search].nil? || params[:search] == ""
-      # @organizations = Organization.geocoded
-    # else
-      # @organizations = Organization.search_by_full_name(params[:search])
-    # end
-
-    # @markers = @organizations.map do |organization|
-      # {
-      #   lat: organization.latitude,
-      #   lng: organization.longitude
-      # }
-    # end
-
-
     # If the user searches for something: it will display the organizations in a 30km radius;
     # else: all organizations will be displayed
+    @organizations = policy_scope(Organization)
     if params[:query].present?
       @organizations = Organization.near(params[:query], 30)
+      @organizations = policy_scope(Organization)
     else
       @organizations = Organization.all
     end
+    @selected_organizations = @organizations.order('created_at ASC').first(9)
   end
 
   def show
     @organization = Organization.find(params[:id])
+    authorize @organization
   end
 
   def new
     @organization = Organization.new
-    # authorize @organization
+    authorize @organization
   end
 
   def create
     @organization = Organization.new(organization_params)
-    # authorize @organization
+    authorize @organization
 
     @organization.save!
     @admin = Admin.new
@@ -55,18 +44,18 @@ class OrganizationsController < ApplicationController
 
   def edit
     @organization = Organization.find(params[:id])
-    # authorize @organization
+    authorize @organization
   end
 
   def update
     @organization = Organization.find(params[:id])
-    # authorize @organization
+    authorize @organization
     @organization.update(organization_params)
     redirect_to organization_path(@organization)
   end
 
   def destroy
-    # authorize @organization
+    authorize @organization
     @organization.destroy
   end
 

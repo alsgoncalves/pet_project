@@ -1,52 +1,31 @@
 
-<!-- POSTS -->
-<div class="container p-5">
-    <div>
-      <%= link_to "+ Create a new post", new_organization_post_path(@organization) %>
-    </div>
-
-    <div class="card-container d-flex">
-      <% @organization.posts.each do |post| %>
-        <div class="card-wrapper">
-          <div class="card-header">
-            <%= post.title %>
-          </div>
-          <div class="card-body">
-            <%= post.description %>
-          </div>
-          <div class="card-buttons">
-            <%= link_to "Update", edit_organization_post_path(@organization, post), class: "btn btn-success" %>
-            <%= link_to 'Delete', organization_post_path(@organization, post),
-                  method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-
-    <!-- EVENTS -->
-    <br>
-    <br>
-    <div>
-      <%= link_to "+ Create a new event", new_organization_event_path(@organization) %>
-    </div>
-
-        <div class="card-container d-flex">
-          <% @organization.events.each do |event| %>
-            <div class="card-wrapper">
-              <div class="card-header">
-              <%= event.title %>
-              </div>
-              <div class="card-body">
-                <%= event.description %>
-                <%= event.part_count %>
-              </div>
-              <div class="card-buttons">
-                <%= link_to "Update", edit_organization_event_path(@organization, event), class: "btn btn-success" %>
-                <%= link_to 'Delete', organization_event_path(@organization, event),
-                      method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-        <%= link_to "+ Add an Admin to your organization", new_organization_admin_path(@organization) %>
-</div>        
+<div class="container-fluid p-0">
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4"><%= @organization.name.capitalize%></h1>
+      <%= cl_image_tag @organization.photos[0].key, class: "float-right img-jumb-show-page" %>
+		</div>
+	</div>
+</div>
+<div class="container-fluid p-5">
+  <h4><%= @organization.description%></h4>
+  <h2 class="text-center">Posts</h2>
+		<%@organization.posts.each do |post|%>
+			<% if !post.nil?%>
+				<h4><%= post.title %><h4>
+				<h6>What will happen: <%= post.description %></h6>
+				<h6>Location: <%= post.location %></h6>
+				<h6>Date: <%= post.date.strftime("%d %B %Y") %></h6>
+			<% end %>
+		<%end%>
+   <h2 class="text-center">Events</h2>
+		<%@organization.events.each do |event|%>
+			<% if !event.nil?%>
+				<h4><%= event.title %><h4>
+				<h6>What will happen: <%= event.description %></h6>
+				<h6>People Needed: <%= event.part_count %></h6>
+				<h6>Location: <%= event.location %></h6>
+				<h6>Date: <%= event.date.strftime("%d %B %Y") %></h6>
+			<% end %>
+		<%end%>
+</div>
