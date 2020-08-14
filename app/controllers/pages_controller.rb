@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :home ]
 
@@ -12,7 +14,7 @@ class PagesController < ApplicationController
     posts = organizations_followed.map { |org| org.posts }.flatten
     events = organizations_followed.map { |org| org.events }.flatten
 
-    @feed = (posts + events).sort_by { |x| x.created_at }
+    @feed = (posts + events).sort_by { |x| x.created_at }.paginate(page: params[:page], per_page: 10)
 
     @organizations_recommended = (Organization.all - organizations_followed).first(3)
 
