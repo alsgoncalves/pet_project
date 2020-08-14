@@ -1,8 +1,14 @@
-<%= simple_form_for [@organization, @post] do |f| %>
-  <%= f.input :title, label: "Title" %>
-  <%= f.input :description, label: "Description", as: :trix_editor %>
-  <%= f.input :location, label: "Please insert location if applicable" %>
-  <%= f.input :date, label: "Please insert post end date if applicable" %>
-  <%= f.button :submit, "Upload" %>
-<% end %>
-<%= link_to "Back", organization_path(@organization) %>
+<div class="container p-5 mt-5">
+  <div class="row">
+    <div class="col-lg-10">
+      <%= simple_form_for [@organization, @post] do |f| %>
+        <%= f.input :title, label: "Title" %>
+        <%= f.input :description, label: "Description", as: :trix_editor %>
+        <%= f.input :location, label: "Please insert location if applicable" %>
+        <%= f.input :date, label: "Please insert post end date if applicable" %>
+        <%= f.button :submit, "Upload" %>
+      <% end %>
+      <%= link_to "Back", organization_path(@organization) %>
+    </div>
+  </div>  
+</div>
