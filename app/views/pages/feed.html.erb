@@ -18,25 +18,7 @@
   </div>
 
   <div style="width: 580px">
-    <% @feed.each do |content| %>
-      <% if content.is_a? Post %>
-        <div style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
-          <p><%= content.organization.name %></p>
-          <p><%= content.title %></p>
-          <p><%= content.description %></p>
-        </div>
-
-      <% elsif content.is_a? Event %>
-        <div style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
-          <p><%= content.organization.name %></p>
-          <p><%= content.title %></p>
-          <p><%= content.description %></p>
-          <p><%= content.part_count %></p>
-          <p><%= content.date %></p>
-          <p><%= content.location %></p>
-        </div>
-      <% end %>
-    <% end %>
+    <%= render partial: "item", collection: @items %>
   </div>
 
   <div style="width: 240px">
