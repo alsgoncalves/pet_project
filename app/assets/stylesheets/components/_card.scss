@@ -1,34 +1,96 @@
 .card-img-top{
   border-radius: 50%;
-  height: 150px;
-  width: 150px;
+  height: 120px;
+  width: 120px;
   display: block;
   margin: auto;
-  margin-top: -30px;
+  margin-top: -25px;
   border: 1px solid white;
 }
 
-.card-organizations{
-  margin-top: 30px;
-  margin-bottom: 50px;
-  background-color:#00BD9D;
-  box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  -webkit-transition: all .2s ease;
-  transition: all .2s ease;
+a{
+  text-decoration: none !important;
+}
+
+.card1 {
+  display: block;
+  position: relative;
+  max-width: 450px;
   height: 350px;
-  border-radius: 10px;
-}
-
-.card-org-name a{
-  font-size: 16px;
-  color: white;
+  background-color: #00bd9d;
+  border-radius: 4px;
+  padding: 32px 24px;
+  margin: 30px 12px 5px 12px;
   text-decoration: none;
-  font-weight: bold;
+  z-index: 0;
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -16px;
+    right: -16px;
+    background: #fb5012;
+    height: 52px;
+    width: 52px;
+    border-radius: 52px;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 0.25s ease-out;
+  }
+  h3 {
+    margin-top: 20px;
+    color: #FBFBF2;
+    font-size: 17px;
+    line-height: 24px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  
+  p {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 20px;
+    color: #FBFBF2;
+  
+    &.small {
+      font-size: 14px;
+    }
+  }
+  &:hover:before {
+    transform: scale(21);
+  }
 }
 
-.card-org-name a:hover{
+.card1:hover {
+  p {
+    transition: all 0.3s ease-out;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  h3 {
+    transition: all 0.3s ease-out;
+    color: #ffffff;
+    font-weight: 500;
+  }
+}
+.go-corner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  background-color: #fb5012;
+  border-radius: 0 4px 0 32px;
+}
+
+.go-arrow {
+  margin-top: -4px;
+  margin-right: -4px;
   color: white;
-  border-bottom: 1px solid white;
-  -webkit-transition: all .2s ease;
-  transition: all .2s ease;
+  font-family: courier, sans;
 }

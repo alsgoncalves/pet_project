@@ -1,7 +1,13 @@
 .jumbotron-fluid{
   margin-top: 100px;
+  background-color: $orange
 }
 
 .jumbotron-fluid h1{
   padding-top: 50px;
+  color: $white;
+}
+
+.jumbotron-fluid p{
+  color: $white;
 }
