@@ -3,29 +3,35 @@
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
 			<h1 class="display-4">Members</h1>
-			<p class="lead">This page includes profiles for nonprofits, businesses, academic institutions and consultants.
-											This is free to members subscribed as an organisation.
-			</p>
+			<p class="lead">This page includes profiles for nonprofits. This is free to members subscribed as an organisation.</p>
 		</div>
 	</div>
-</div>	
+</div>
+
+
+
 <div class="container">
 	<div class="row">
 		<% @selected_organizations.each do |organization| %>
-		<div class="col-lg-4 col-md-6 col-sm-10 col-10">
-			<div class="card card-organizations">
-				<% if organization.photos.attached? %>
-					<%= cl_image_tag organization.photos[0].key, class: "card-img-top" %>
-					<div class="card-body">
-						<h5 class="card-title"><%= link_to organization.name, organization_path(organization) %></h5>
-						<p class="card-text"><%= organization.description %></p>
-				<% end %>
-					<%#= link_to organization.name, organization_path(organization)  class="btn btn-primary" %>
+			<div class="col-lg-4 col-md-6 col-sm-10 col-10">
+				<a class="card1">
+					<% if organization.photos.attached? %>
+						<%= cl_image_tag organization.photos[0].key, class: "card-img-top" %>
+					<%end%>		
+					<h3><%= organization.name.upcase %></h3>
+					<p class="small"><%= truncate(organization.description, :length => 60) %></p>
+					<div class="go-corner">
+						<div class="go-arrow">
+							→ 
+						</div>
+					</div>
+				</a>
+				<%= link_to "Read More", organization_path(organization),  class: "button-card-org" %>
 			</div>
-		</div>	
+		<% end %>	
 	</div>
-	<% end %>	
 </div>
+
 <nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
 			<li class="page-item disabled">

@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :favourites
 
   def find_admin_for(organization_id)
-    admins.first { |admin| admin.organization_id == organization_id }
+    admins.find { |admin| admin.organization_id == organization_id }
   end
 
   def admin_for?(organization_id)
@@ -19,22 +19,22 @@ class User < ApplicationRecord
 
   def can_edit?(organization)
     admin = find_admin_for(organization.id)
-    !admin.nil? && admin.can_edit
+    !admin.nil? && (admin.can_edit || admin.is_owner)
   end
 
   def can_add_events_for?(organization)
     admin = find_admin_for(organization.id)
-    !admin.nil? && admin.can_add_events
+    !admin.nil? && (admin.can_add_events || admin.is_owner)
   end
 
   def can_add_posts_for?(organization)
     admin = find_admin_for(organization.id)
-    !admin.nil? && admin.can_add_posts
+    !admin.nil? && (admin.can_add_posts || admin.is_owner)
   end
 
   def can_add_admin_to?(organization)
     admin = find_admin_for(organization.id)
-    !admin.nil? && admin.can_add_admin
+    !admin.nil? && (admin.can_add_admin || admin.is_owner)
   end
 
   def is_owner?(organization)

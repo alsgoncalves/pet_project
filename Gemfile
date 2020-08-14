@@ -8,6 +8,7 @@ gem 'country_select', '~> 4.0'
 gem 'flatpickr'
 gem 'faker'
 gem 'pundit'
+gem 'trix-rails', require: 'trix'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 # Use postgresql as the database for Active Record
