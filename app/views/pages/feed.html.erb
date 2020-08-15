@@ -18,8 +18,11 @@
   </div>
 
   <div style="width: 580px">
-    <%= render partial: "item", collection: @items %>
+    <div id="items-list">
+      <%= render partial: "item", collection: @items %>
+    </div>
   </div>
+    <%= will_paginate @items %>
 
   <div style="width: 240px">
     <div style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
