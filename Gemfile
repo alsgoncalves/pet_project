@@ -69,3 +69,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Get the coordinates of an address
 gem 'geocoder'
+
+# Add pagination
+gem 'will_paginate'
