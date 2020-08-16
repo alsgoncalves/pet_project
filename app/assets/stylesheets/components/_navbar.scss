@@ -10,3 +10,19 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+
+
+//show page navegation 
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: $white;
+  background-color: $green;
+  font-size: 20px;
+}
+
+.nav-pills .nav-link {
+  border-radius: 2px;
+  color: $green;
+  font-size: 20px;
+}
