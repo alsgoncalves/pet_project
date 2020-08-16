@@ -1,10 +1,35 @@
 .form {
   margin-right: 0 !important;
   .search-bar {
-    width: 40vw;
+    width: 30vw;
   }
 }
 
 .search-bar-input {
   width: 45%;
+  height: 40px;
+  background-color: #FD6A35;
+  border: 3px solid #FD885E;
+  border-radius: 20px;
+  padding: 0 12px;
+}
+
+.search-bar-input{
+  input {
+    flex: 1 1 auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    height: 100%;
+    background: transparent;
+    color: white;
+  }
+}
+
+.search-bar button {
+  color: white;
+  border: none;
+  background-color: transparent;
+  margin-left: -40px;
 }

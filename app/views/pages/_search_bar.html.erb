@@ -4,5 +4,7 @@
     class: "search-bar-input",
     placeholder: "Search by locations near you"
   %>
-  <%= submit_tag "Search", class: "search-bar-submit" %>
+  <%= button_tag :submit do %>
+    <i class="fas fa-search"></i>
+  <% end %>
 <% end %>
