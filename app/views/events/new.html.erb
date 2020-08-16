@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-lg-10">
       <%= simple_form_for [@organization, @event] do |f| %>
-        <%= f.input :title, label: "Title" %>
-        <%= f.input :description, as: :trix_editor %>
+        <%= f.input :title, label: "Title" %>>
+        <%= f.rich_text_area :description %>
         <%= f.input :part_count, :collection => 1..100, label: "Number of people needed" %>
         <%= f.input :location, label: "Please insert location if applicable" %>
         <%= f.input :date, label: "Please insert post end date if applicable" %>
