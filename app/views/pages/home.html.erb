@@ -1,4 +1,46 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
 
-<%= render "search_bar" %>
+<!-- BANNER -->
+
+<div class="banner-landing">
+  <div class="banner-container">
+    <h1>Do you want to give back to your community?</h1>
+    <h4>Find organizations nearby that you can help!</h4>
+    <%= render "search_bar" %>
+  </div>
+</div>
+
+<!-- CARDS CONTAINER -->
+<div class="container-container">
+  <h3>Things you can do with Chance</h3>
+  <div class="cards-container">
+    <div class="home-card">
+      <div class="card-image">
+        <%= image_tag('box.png') %>
+      </div>
+      <div class="card-text">
+        <h5>Donate</h5>
+        <p>Donate cloth items, food, toys and more to the organizations in need.</p>
+      </div>
+    </div>
+    <div class="home-card">
+      <div class="card-image">
+        <%= image_tag('people.png') %>
+      </div>
+      <div class="card-text">
+        <h5>Volunteer</h5>
+        <p>Find out open volunteer positions and get enrolled in a click.</p>
+      </div>
+    </div>
+    <div class="home-card">
+      <div class="card-image">
+        <%= image_tag('be-informed.png') %>
+      </div>
+      <div class="card-text">
+        <h5>Keep up to date</h5>
+        <p>Track the newest posts and events happening around you.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,20 @@
+.banner-landing {
+  background-image: url(landing.jpg);
+  width: 100vw;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.banner-container {
+  color: black;
+  text-align: center;
+  h4 {
+    margin-bottom: 25px;
+  }
+}

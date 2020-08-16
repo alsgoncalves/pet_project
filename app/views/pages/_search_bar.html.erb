@@ -1,8 +1,10 @@
 <%= form_tag organizations_path, method: :get, class: "search-bar" do %>
   <%= text_field_tag :query,
     params[:query],
-    class: "form-control",
+    class: "search-bar-input",
     placeholder: "Search by locations near you"
   %>
-  <%= submit_tag "Search" %>
+  <%= button_tag :submit do %>
+    <i class="fas fa-search"></i>
+  <% end %>
 <% end %>
