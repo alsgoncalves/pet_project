@@ -1,9 +1,22 @@
 a.button-card-org{
-  color: #00BD9D;
+  color: $green;
   text-decoration: none;
-  background-color: white;
+  background-color: $white;
   padding: 15px;
   display: inline-flex;
   border-radius: 5px;
   margin-left: 15px;
+  border: 2px solid $green;
+  margin-top: 10px;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+a.button-card-org:hover{
+  background-color: $orange;
+  color: $white;
+  border: 1px solid $orange;
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.3), 0 0 1px 0 rgba(0, 0, 0, 0.25);
 }
