@@ -2,7 +2,9 @@
 <div class="container-fluid p-0">
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
+			<p class="small"><%= link_to "<-- Back to all organizations", organizations_path(@organizations) %></p>
 			<h1 class="display-4"><%= @organization.name.capitalize%></h1>
+			<h6>Location: <%= @organization.address.capitalize%></h6>
       <%= cl_image_tag @organization.photos[0].key, class: "float-right img-jumb-show-page" %>
 		</div>
 	</div>

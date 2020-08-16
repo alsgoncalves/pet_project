@@ -3,7 +3,7 @@
     <div class="col-lg-10">
       <%= simple_form_for organization do |f| %>
         <%= f.input :name %>
-        <%= f.rich_text_area :description %>
+        <%= f.input :description %>
         <%= f.input :category, :collection => [
           'Charitable Orientation',
           'Service Orientation',

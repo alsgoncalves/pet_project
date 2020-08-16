@@ -16,10 +16,6 @@ class Organization < ApplicationRecord
   validates :category,      presence: true, length: { minimum: 2 } # Provides a list to choose from
   validates :description,   presence: true, length: { minimum: 5 }
 
-  
-  #add style to description field
-  has_rich_text :description
-
   # Get the Organization's coordinates based on the address and city provided by the user
   geocoded_by :full_address
   after_validation :geocode, if: :will_save_change_to_address?
