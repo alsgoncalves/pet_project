@@ -3,7 +3,10 @@
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
 			<p class="small"><%= link_to "<-- Back to all organizations", organizations_path(@organizations) %></p>
-			<h1 class="display-4"><%= @organization.name.capitalize%></h1>
+			<h1 class="display-4"><%= @organization.name.upcase%></h1>
+			<% if !current_user.nil? && current_user.can_edit?(@organization)%>
+				<%= link_to edit_organization_path(@organization.id), :class=> "you_class" do %><i class="fa fa-envelope-o" aria-hidden="true" target="_blank"></i><% end %>
+			<% end %>
 			<h6>Location: <%= @organization.address.capitalize%></h6>
       <%= cl_image_tag @organization.photos[0].key, class: "float-right img-jumb-show-page" %>
 		</div>
