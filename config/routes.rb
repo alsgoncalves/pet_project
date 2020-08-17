@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # Override the params accepted in the User Registration
+  devise_for :users, controllers: { registrations: 'user/registrations' }
+
   resources :users, only: [:update] do
     resources :favorites, only: [:create, :destroy]
     resources :participations, only: [ :index, :create, :destroy ]
