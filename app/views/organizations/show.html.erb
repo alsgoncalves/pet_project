@@ -31,22 +31,25 @@
 	</div>
 	<!--Posts content-->
 	<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-		<h2 class="text-center">Posts</h2>
-			<%@organization.posts.each do |post|%>
+		<h2 class="text-center posts-showpage">Posts</h2>
+		<div class="container-fluid p-5">
+			<% @organization.posts.each do |post|%>
 				<% if !post.nil?%>
 					<h4><%= post.title %><h4>
 					<h6>What will happen: <%= post.description %></h6>
 					<h6>Location: <%= post.location %></h6>
 					<h6>Date: <%= post.date.strftime("%d %B %Y") %></h6>
 				<% end %>
-			<%end%>
-			<%if current_user.can_add_posts_for?(@organization)%>
+			<% end %>
+			<% if !current_user.nil? && current_user.can_add_posts_for?(@organization) %>
 				<%= link_to "Add a new post", new_organization_post_path(@organization.id) %>
-			<%end%>
+			<% end %>
+		</div>	
 	</div>
 	<!--Events content-->
 	<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-		<h2 class="text-center">Events</h2>
+		<h2 class="text-center events-showpage">Events</h2>
+		<div class="container-fluid p-5">
 			<%@organization.events.each do |event|%>
 				<% if !event.nil?%>
 					<h4><%= event.title %><h4>
@@ -55,9 +58,10 @@
 					<h6>Location: <%= event.location %></h6>
 					<h6>Date: <%= event.date.strftime("%d %B %Y") %></h6>
 				<% end %>
-			<%end%>
-			<%if current_user.can_add_events_for?(@organization)%>
+			<% end %>
+			<% if !current_user.nil? && current_user.can_add_events_for?(@organization)%>
 				<%= link_to "Add a new event", new_organization_event_path(@organization.id) %>
-			<%end%>
+			<% end %>
+		</div>	
 	</div>
 </div>
