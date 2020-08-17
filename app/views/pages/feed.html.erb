@@ -1,48 +1,50 @@
-<div style="display: flex; justify-content: center">
-  <div style="width: 180px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
-    <div style="display: flex; flex-direction: column; align-items: center; padding: 10px 5px; border-bottom: 1px solid rgb(180, 180, 180)">
+<div style="display: flex; justify-content: center; padding: 20px 10px; margin-top: 70px">
+  <div style="width: 160px; min-width: 160px; margin: 0 10px; height: fit-content; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); position: sticky; top: 90px">
+    <div style="display: flex; flex-direction: column; align-items: center; padding: 10px; border-bottom: 1px solid rgb(180, 180, 180)">
       <img src="https://cdn1.vectorstock.com/i/1000x1000/23/70/man-avatar-icon-flat-vector-19152370.jpg" alt="user avatar"
         class="avatar-large" style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
 
-      <h2 style="font-weight: 600; font-size: 18px; margin-top: 12px"><%= @name %></h2>
+      <h3 style="font-size: 16px; margin: 12px 0 0"><%= @name %></h3>
     </div>
 
-    <div style="padding: 10px 5px; border-bottom: 1px solid rgb(180, 180, 180)">
-      <p style="margin-bottom: 12px">Favourites:</p>
-      <p style="margin-bottom: 12px">Events:</p>
+    <div style="padding: 10px; border-bottom: 1px solid rgb(180, 180, 180)">
+      <p style="font-size: 14px; margin-bottom: 12px">Favourites:</p>
+      <p style="font-size: 14px; margin-bottom: 12px">Events:</p>
     </div>
 
-    <div style="padding: 10px 5px">
+    <div style="padding: 10px">
       <p>Calendar</p>
     </div>
   </div>
 
-  <div style="width: 580px">
+  <div style="width: 580px; min-width: 580px; margin: 0 10px">
     <div id="items-list">
       <%= render partial: "item", collection: @items %>
     </div>
-  </div>
     <%= will_paginate @items %>
+  </div>
 
-  <div style="width: 240px">
-    <div style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
-      <h2 style="font-size: 22px">Add to your favourites</h2>
+  <div style="width: 240px; height: fit-content; min-width: 240px; margin: 0 10px; position: sticky; top: 90px">
+    <div style="padding: 10px; margin-bottom: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
+      <h2 style="font-size: 22px">Sugestions</h2>
 
       <% @organizations_recommended.each do |org| %>
         <div>
-          <p><%= org.name %></p>
+          <h6><%= org.name %></p>
         </div>
       <% end %>
       <a href="#">View all recommendations</a>
     </div>
 
-    <div style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); margin-top: 10px">
+    <div style="padding: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
       <h2 style="font-size: 22px">Events near you</h2>
 
       <% @near_events.each do |event| %>
-        <p><%= event.organization.name %></p>
-        <p><%= event.title %></p>
-        <p><%= event.date %></p>
+        <div style="margin-bottom: 16px">
+          <h6><%= event.organization.name %></h6>
+          <p style="font-size: 14px; margin-bottom: 8px"><%= event.title %></p>
+          <p style="font-size: 14px; margin-bottom: 8px"><%= event.date.strftime("%d %b, %Y (%l%p)") %></p>
+        </div>
       <% end %>
     </div>
   </div>
