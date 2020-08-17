@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :participations
   has_many :favourites
 
+  has_one_attached :avatar
+
   def find_admin_for(organization_id)
     admins.find { |admin| admin.organization_id == organization_id }
   end
