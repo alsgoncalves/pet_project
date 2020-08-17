@@ -15,6 +15,7 @@
         <%= f.input :email %>
         <%= f.input :address %>
         <%= f.input :city %>
+        <%= f.input :avatar, as: :file %>
         <%= f.input :photos, as: :file, input_html: { multiple: true } %>
         <%= f.button :submit, class: "form-btn" %>
       <% end %>
