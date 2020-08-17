@@ -11,6 +11,11 @@
       <h5 style="font-size: 18px; margin-bottom: 8px"><%= item.title %></h5>
       <p style="font-size: 14px; margin: 0px"><%= item.description %></p>
     </div>
+    <% if item.images.exists? %>
+      <% item.images.each do |image| %>
+        <img src="<%= cl_image_path image.key, height: 1000, width: 1000, crop: :fill %>" alt="post image" class="avatar-square">
+      <% end %>
+    <% end %>
   <% elsif item.is_a? Event %>
     <div style="display: flex; justify-content: space-between">
       <div style="margin-left: 5px">
