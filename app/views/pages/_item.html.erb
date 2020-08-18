@@ -1,5 +1,5 @@
-<div style="padding: 15px; margin-bottom: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
-  <div style="display: flex; margin-bottom: 12px">
+<div style="padding: 15px 0; margin-bottom: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
+  <div style="display: flex; padding: 0 15px; margin-bottom: 12px">
     <img src="<%= cl_image_path item.organization.avatar.key, height: 1000, width: 1000, crop: :fill %>" alt="organization avatar" class="avatar-square">
 
     <div style="margin-left: 10px">
@@ -9,15 +9,15 @@
   </div>
 
   <% if item.is_a? Post %>
-    <div style="margin-left: 5px">
+    <div style="padding: 0 15px; margin-left: 5px">
       <h5 style="font-size: 18px; margin-bottom: 8px"><%= item.title %></h5>
       <p style="font-size: 14px; margin: 0px"><%= item.description %></p>
     </div>
 
-    <!-- Carroussel of Post images -->
     <% if item.images.size == 1 %>
       <img class="d-block w-100" src="<%= cl_image_path item.images.first.key %>" alt="post image">
 
+    <!-- Carroussel of Post images -->
     <% elsif item.images.size > 1 %>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -46,8 +46,13 @@
       </div>
     <% end %>
 
+    <div style="padding: 0 15px">
+      <a href="#">Share</a>
+      <a href="#">Learn more</a>
+    </div>
+
   <% elsif item.is_a? Event %>
-    <div style="display: flex; justify-content: space-between">
+    <div style="display: flex; justify-content: space-between; padding: 0 15px">
       <div style="margin-left: 5px">
         <h5 style="font-size: 18px; margin-bottom: 8px"><%= item.title %></h5>
         <p style="font-size: 14px; margin: 0px"><%= item.description %></p>
@@ -58,6 +63,12 @@
         <p style="font-size: 12px; margin: 0px"><%= item.date.strftime("%d %b, %Y (%l%p)") %></p>
         <p style="font-size: 12px; margin: 0px"><%= item.location %></p>
       </div>
+    </div>
+
+    <div style="padding: 0 15px">
+      <a href="#">Share</a>
+      <a href="#">Learn more</a>
+      <a href="#">Participate</a>
     </div>
   <% end %>
 </div>
