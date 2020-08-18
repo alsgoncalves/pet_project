@@ -15,7 +15,10 @@
     </div>
 
     <!-- Carroussel of Post images -->
-    <% if item.images.exists? %>
+    <% if item.images.size == 1 %>
+      <img class="d-block w-100" src="<%= cl_image_path item.images.first.key %>" alt="post image">
+
+    <% elsif item.images.size > 1 %>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <% item.images.size.times do |i| %>
