@@ -3,8 +3,10 @@
   border-radius: 50%;
 }
 .avatar-large {
-  width: 56px;
+  width: 75px;
   border-radius: 50%;
+  border: 1px solid rgb(180, 180, 180);
+  box-shadow: 0 0 2px rgb(180, 180, 180);
 }
 .avatar-bordered {
   width: 40px;

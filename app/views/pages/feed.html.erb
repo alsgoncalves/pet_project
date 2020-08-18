@@ -1,19 +1,26 @@
 <div style="display: flex; justify-content: center; padding: 20px 10px; margin-top: 70px">
-  <div style="width: 160px; min-width: 160px; margin: 0 10px; height: fit-content; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); position: sticky; top: 90px">
+  <div style="width: 200px; min-width: 200px; margin: 0 10px; height: fit-content; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); position: sticky; top: 90px">
     <div style="display: flex; flex-direction: column; align-items: center; padding: 10px; border-bottom: 1px solid rgb(180, 180, 180)">
       <% if current_user.avatar.present? %>
-        <img src="<%= cl_image_path current_user.avatar.key, height: 1000, width: 1000, crop: :fill %>" alt="user avatar"
-          class="avatar-large" style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
+        <img src="<%= cl_image_path current_user.avatar.key, height: 1000, width: 1000, crop: :fill %>" alt="user avatar" class="avatar-large">
       <% else %>
-        <%= image_tag "default-user-avatar.png", alt: "user avatar", class: "avatar-large", style: "border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)" %>
+        <%= image_tag "default-user-avatar.png", alt: "user avatar", class: "avatar-large" %>
       <% end %>
 
       <h3 style="font-size: 16px; margin: 12px 0 0"><%= @name %></h3>
     </div>
 
     <div style="padding: 10px; border-bottom: 1px solid rgb(180, 180, 180)">
-      <p style="font-size: 14px; margin-bottom: 12px">Favourites:</p>
-      <p style="font-size: 14px; margin-bottom: 12px">Events:</p>
+      <p style="font-size: 14px; margin-bottom: 8px">My Organizations (n)</p>
+      <p style="font-size: 12px; margin-bottom: 8px">2. Environmental</p>
+      <p style="font-size: 12px; margin-bottom: 8px">2. Children and Young People</p>
+      <p style="font-size: 12px; margin-bottom: 12px">3. Elderly and disabled</p>
+
+      <p style="font-size: 14px; margin-bottom: 8px">My Events (n)</p>
+      <p style="font-size: 12px; margin-bottom: 8px">1. Environmental</p>
+      <p style="font-size: 12px; margin-bottom: 8px">2. Children and Young People</p>
+      <p style="font-size: 12px; margin-bottom: 8px">3. Homeless</p>
+      <p style="font-size: 12px; margin-bottom: 8px">Future Events</p>
     </div>
 
     <div style="padding: 10px">
@@ -21,14 +28,14 @@
     </div>
   </div>
 
-  <div style="width: 580px; min-width: 580px; margin: 0 10px">
+  <div style="width: 550px; min-width: 550px; margin: 0 10px">
     <div id="items-list">
       <%= render partial: "item", collection: @items %>
     </div>
     <%= will_paginate @items %>
   </div>
 
-  <div style="width: 240px; height: fit-content; min-width: 240px; margin: 0 10px; position: sticky; top: 90px">
+  <div style="width: 200px; min-width: 200px; height: fit-content; margin: 0 10px; position: sticky; top: 90px">
     <div style="padding: 10px; margin-bottom: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
       <h2 style="font-size: 22px">Sugestions</h2>
 
