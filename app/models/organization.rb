@@ -6,6 +6,7 @@ class Organization < ApplicationRecord
   has_many :posts, dependent: :destroy
 
   has_many_attached :photos
+  has_one_attached :avatar
 
   # Model validations
   validates :name,          presence: true, length: { minimum: 2 }

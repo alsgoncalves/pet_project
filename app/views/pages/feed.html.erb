@@ -1,7 +1,7 @@
 <div style="display: flex; justify-content: center; padding: 20px 10px; margin-top: 70px">
   <div style="width: 160px; min-width: 160px; margin: 0 10px; height: fit-content; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); position: sticky; top: 90px">
     <div style="display: flex; flex-direction: column; align-items: center; padding: 10px; border-bottom: 1px solid rgb(180, 180, 180)">
-      <img src="https://cdn1.vectorstock.com/i/1000x1000/23/70/man-avatar-icon-flat-vector-19152370.jpg" alt="user avatar"
+      <img src="<%= cl_image_path current_user.avatar.key, height: 1000, width: 1000, crop: :fill %>" alt="user avatar"
         class="avatar-large" style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
 
       <h3 style="font-size: 16px; margin: 12px 0 0"><%= @name %></h3>
