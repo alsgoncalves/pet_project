@@ -28,6 +28,6 @@ const NavbarOnScroll = () => {
   });
 }
 
-NavbarOnScroll();
+export { NavbarOnScroll };
 
-navSlide();
+export { navSlide };
