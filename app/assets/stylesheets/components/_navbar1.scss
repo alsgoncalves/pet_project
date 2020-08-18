@@ -5,19 +5,17 @@
   min-height: 7vh;
   background-color: transparent;
   z-index: 10;
-
-
   position: fixed;
   top: 0;
   width: 100%;
   transition: 0.6s;
-  // background-color: #D6FFF8;
 }
 
 .nav-links {
   background-color: transparent;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   width: 30%;
   margin-bottom: 0;
   padding-left: 0;
@@ -29,6 +27,28 @@
 .nav-links a {
   text-transform: uppercase;
   color: black;
+}
+
+.avatar-links {
+  display: none;
+  position: absolute;
+  right: 0px;
+  height: 30vh;
+  width: 20vw;
+  top: 10vh;
+}
+
+.avatar-links-active {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 0;
+  padding-top: 15px;
+  transform: translateX(0%);
+  li {
+    padding-bottom: 20px;
+  }
 }
 
 .burger {
