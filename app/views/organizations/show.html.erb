@@ -2,16 +2,18 @@
 <div class="container-fluid p-0">
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
-			<p class="small"><%= link_to "<-- Back to all organizations", organizations_path(@organizations) %></p>
-			<h1 class="display-4"><%= @organization.name.upcase%></h1>
-			<% if !current_user.nil? && current_user.can_edit?(@organization)%>
-				<%= link_to edit_organization_path(@organization.id), :class=> "you_class" do %><i class="fa fa-envelope-o" aria-hidden="true" target="_blank"></i><% end %>
-			<% end %>
+			<p class="small"><%= link_to "<-- Back to all organizations", organizations_path(@organizations), {:style=>'color:#FFFFFF;', :hover=>'font-weight:bold;'}%></p>
+			<h1 class="display-4"><%= @organization.name.upcase%>
+				<% if !current_user.nil? && current_user.can_edit?(@organization)%>
+					<%= link_to (fa_icon "edit", class: 'mx-1', size: '1x', color: 'white' ), edit_organization_path(@organization.id) %>
+				<% end %>
+			</h1>
 			<h6>Location: <%= @organization.address.capitalize%></h6>
       <%= cl_image_tag @organization.photos[0].key, class: "float-right img-jumb-show-page" %>
 		</div>
 	</div>
 </div>
+
 
 <!--Navegation-->	
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -24,7 +26,12 @@
 	<li class="nav-item" role="presentation">
 		<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Events</a>
 	</li>
+	<>
+	<li class="nav-item" role="presentation">
+		<a class="nav-link" id="pills-settings-tab" data-toggle="pill" href="#pills-settings" role="tab" aria-controls="pills-settings" aria-selected="false">Settings</a>
+	</li>
 </ul>
+
 <!--Page content-->
 <div class="tab-content" id="pills-tabContent">
 	<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -62,6 +69,14 @@
 					<h6>Date: <%= event.date.strftime("%d %B %Y") %></h6>
 				<% end %>
 			<% end %>
+			<% if !current_user.nil? && current_user.can_add_events_for?(@organization)%>
+				<%= link_to "Add a new event", new_organization_event_path(@organization.id) %>
+			<% end %>
+		</div>	
+	</div>
+	<div class="tab-pane fade" id="pills-settings" role="tabpanel" aria-labelledby="pills-settings-tab">
+		<h2 class="text-center events-showpage">Settings</h2>
+		<div class="container-fluid p-5">
 			<% if !current_user.nil? && current_user.can_add_events_for?(@organization)%>
 				<%= link_to "Add a new event", new_organization_event_path(@organization.id) %>
 			<% end %>

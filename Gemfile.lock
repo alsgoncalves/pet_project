@@ -107,10 +107,10 @@ GEM
       i18n (>= 1.6, < 2)
     ffi (1.13.1)
     flatpickr (4.6.3.1)
-    font-awesome-rails (4.7.0.5)
-      railties (>= 3.2, < 6.1)
     font-awesome-sass (5.13.0)
       sassc (>= 1.11)
+    font_awesome5_rails (1.2.0)
+      railties (>= 4.2)
     geocoder (1.6.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -287,8 +287,8 @@ DEPENDENCIES
   dotenv-rails
   faker
   flatpickr
-  font-awesome-rails
   font-awesome-sass
+  font_awesome5_rails
   geocoder
   jbuilder (~> 2.7)
   listen (~> 3.2)
