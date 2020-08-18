@@ -9,6 +9,7 @@ gem 'flatpickr'
 gem 'faker'
 gem 'pundit'
 gem 'trix-rails', require: 'trix'
+gem 'font_awesome5_rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 # Use postgresql as the database for Active Record

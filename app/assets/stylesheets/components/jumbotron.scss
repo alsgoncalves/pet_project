@@ -8,6 +8,17 @@
   color: $white;
 }
 
+.jumbotron-fluid h6{
+  color: $white;
+}
+
 .jumbotron-fluid p{
   color: $white;
 }
+
+
+.fa-edit:before {
+  content: "\f044";
+ color: white;
+}
+
