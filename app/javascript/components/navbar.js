@@ -28,6 +28,14 @@ const navSlide = () => {
   const avatarClick = avatar.addEventListener('click', () => {
     if (nav.classList.contains("nav-active")) {
       nav.classList.toggle("nav-active");
+
+      navLinks.forEach((link, index) => {
+        if (link.style.animation) {
+          link.style.animation = ''
+        } else {
+          link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.5}s`;
+        }
+      });
     };
 
     avatarLinks.classList.toggle('avatar-links-active');
