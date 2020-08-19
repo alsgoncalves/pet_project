@@ -1,4 +1,4 @@
-<div style="padding: 15px 0; margin-bottom: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
+<div style="padding: 15px 0 0; margin-bottom: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
   <div style="display: flex; padding: 0 15px; margin-bottom: 12px">
     <img src="<%= cl_image_path item.organization.avatar.key, height: 1000, width: 1000, crop: :fill %>" alt="organization avatar" class="avatar-square">
 
@@ -9,17 +9,16 @@
   </div>
 
   <% if item.is_a? Post %>
-    <div style="padding: 0 15px; margin-left: 5px">
-      <h5 style="font-size: 18px; margin-bottom: 8px"><%= item.title %></h5>
+    <div style="padding: 0 15px">
       <p style="font-size: 14px; margin: 0px"><%= item.description %></p>
     </div>
 
     <% if item.images.size == 1 %>
-      <img class="d-block w-100" src="<%= cl_image_path item.images.first.key %>" alt="post image">
+      <img class="d-block w-100" src="<%= cl_image_path item.images.first.key %>" alt="post image" style="margin-bottom: -1px">
 
     <!-- Carroussel of Post images -->
     <% elsif item.images.size > 1 %>
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-bottom: -1px">
         <ol class="carousel-indicators">
           <% item.images.size.times do |i| %>
             <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>" class="<%= "active" if i.zero? %>"></li>
@@ -46,29 +45,58 @@
       </div>
     <% end %>
 
-    <div style="padding: 0 15px">
-      <a href="#">Share</a>
-      <a href="#">Learn more</a>
+    <div style="padding: 0 0 5px; margin: 0 15px; border-top: 1px solid rgba(180, 180, 180, 0.6); display: flex">
+      <%= link_to "#", style: "display: flex; margin: 5px 15px 0 0; padding: 5px 8px" do %>
+        <i class="fas fa-share" style="margin-top: 2px"></i>
+        <p style="margin: 0 0 0 5px">Share</p>
+      <% end %>
+
+      <%= link_to "#", style: "display: flex; margin: 5px 0 0; padding: 5px 8px" do %>
+        <i class="fas fa-info-circle" style="margin-top: 2px"></i>
+        <p style="margin: 0 0 0 5px">More</p>
+      <% end %>
     </div>
 
   <% elsif item.is_a? Event %>
-    <div style="display: flex; justify-content: space-between; padding: 0 15px">
-      <div style="margin-left: 5px">
-        <h5 style="font-size: 18px; margin-bottom: 8px"><%= item.title %></h5>
-        <p style="font-size: 14px; margin: 0px"><%= item.description %></p>
+    <div style="padding: 0 15px">
+      <h5 style="font-size: 18px; margin-bottom: 12px"><%= item.title %></h5>
+
+      <div style="display: flex">
+        <i class="fas fa-map-marker-alt"></i>
+        <p style="font-size: 14px; margin: 0 0 8px 5px"><%= item.location %></p>
       </div>
 
-      <div>
-        <p style="font-size: 14px; margin: 0px"><%= item.part_count %> individuals</p>
-        <p style="font-size: 12px; margin: 0px"><%= item.date.strftime("%d %b, %Y (%l%p)") %></p>
-        <p style="font-size: 12px; margin: 0px"><%= item.location %></p>
+      <div style="display: flex">
+        <i class="fas fa-calendar"></i>
+        <p style="font-size: 14px; margin: 0 0 8px 5px"><%= item.date.strftime("%d %b, %Y ( %l%p )") %></p>
       </div>
+
+      <div style="display: flex">
+        <i class="fas fa-user"></i>
+
+        <p style="font-size: 14px; margin: 0 0 12px 5px">
+          <%= item.part_count %>
+          ( 2 spots avaliable )
+        </p>
+      </div>
+      <p style="font-size: 14px; margin: 0px"><%= item.description %></p>
     </div>
 
-    <div style="padding: 0 15px">
-      <a href="#">Share</a>
-      <a href="#">Learn more</a>
-      <a href="#">Participate</a>
+    <div style="padding: 0 0 5px; margin: 0 15px; border-top: 1px solid rgba(180, 180, 180, 0.6); display: flex">
+      <%= link_to "#", style: "display: flex; margin: 5px 15px 0 0; padding: 5px 8px" do %>
+        <i class="fas fa-hand-paper" style="margin-top: 2px"></i>
+        <p style="margin: 0 0 0 5px">Participate</p>
+      <% end %>
+
+      <%= link_to "#", style: "display: flex; margin: 5px 15px 0 0; padding: 5px 8px" do %>
+        <i class="fas fa-share" style="margin-top: 2px"></i>
+        <p style="margin: 0 0 0 5px">Share</p>
+      <% end %>
+
+      <%= link_to "#", style: "display: flex; margin: 5px 0 0; padding: 5px 8px" do %>
+        <i class="fas fa-info-circle" style="margin-top: 2px"></i>
+        <p style="margin: 0 0 0 5px">More</p>
+      <% end %>
     </div>
   <% end %>
 </div>
