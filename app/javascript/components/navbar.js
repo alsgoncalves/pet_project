@@ -5,11 +5,11 @@ const navSlide = () => {
   const avatar = document.querySelector('.nav-avatar img')
   const avatarLinks = document.querySelector('.avatar-links')
 
-  avatar.addEventListener('click', () => {
+  const avatarClick = avatar.addEventListener('click', () => {
     avatarLinks.classList.toggle('avatar-links-active');
   });
 
-  burger.addEventListener('click', () => {
+  const burgerClick= burger.addEventListener('click', () => {
     // Toogle Nav
     nav.classList.toggle('nav-active');
 
