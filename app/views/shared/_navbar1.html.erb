@@ -2,34 +2,38 @@
   <div class="logo">
     <%= image_tag('logo.png', width: "160") %>
   </div>
-  <ul class="nav-links">
-    <li>
-      <a href=""><%= link_to "Home", root_path %></a>
-    </li>
-    <li>
-      <a href=""><%= link_to "Organizations", organizations_path %></a>
-    </li>
-    <% if current_user.present? %>
-      <li class="nav-avatar">
-        <%= avatar_small(current_user) %>
-          <ul class="avatar-links">
-            <li>
-              <a href=""><%= link_to "My Account", feed_path %></a>
-            </li>
-            <li>
-              <a href=""><%= link_to "Log out", destroy_user_session_path, method: :delete %></a>
-            </li>
-          </ul>
-      </li>
-    <% else %>
+  <div class="nav-links-container">
+    <ul class="nav-links">
       <li>
-        <a href=""><%= link_to "Log in", new_user_session_path %></a>
+        <a href=""><%= link_to "Home", root_path %></a>
       </li>
       <li>
-        <a href=""><%= link_to "Sign Up", new_user_registration_path %></a>
+        <a href=""><%= link_to "Organizations", organizations_path %></a>
       </li>
-    <% end %>
-  </ul>
+     </ul>
+     <ul class="nav-login">
+      <% if current_user.present? %>
+        <li class="nav-avatar">
+          <%= avatar_small(current_user) %>
+            <ul class="avatar-links">
+              <li>
+                <a href=""><%= link_to "My Account", feed_path %></a>
+              </li>
+              <li>
+                <a href=""><%= link_to "Log out", destroy_user_session_path, method: :delete %></a>
+              </li>
+            </ul>
+        </li>
+      <% else %>
+        <li>
+          <a href=""><%= link_to "Log in", new_user_session_path %></a>
+        </li>
+        <li>
+          <a href=""><%= link_to "Sign Up", new_user_registration_path %></a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
   <div class="burger">
     <div class="line1"></div>
     <div class="line2"></div>
