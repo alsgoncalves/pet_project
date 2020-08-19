@@ -11,16 +11,29 @@
     </div>
 
     <div style="padding: 10px; border-bottom: 1px solid rgb(180, 180, 180)">
-      <p style="font-size: 14px; margin-bottom: 8px">My Organizations (n)</p>
-      <p style="font-size: 12px; margin-bottom: 8px">2. Environmental</p>
-      <p style="font-size: 12px; margin-bottom: 8px">2. Children and Young People</p>
-      <p style="font-size: 12px; margin-bottom: 12px">3. Elderly and disabled</p>
+      <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px">My Organizations ( 12 )</h4>
+      <p style="font-size: 12px; margin-bottom: 8px">2. Environmental ( 6 )</p>
+      <p style="font-size: 12px; margin-bottom: 8px">2. Children and Young People ( 3 )</p>
+      <p style="font-size: 12px; margin-bottom: 14px">3. Elderly and disabled ( 2 )</p>
 
-      <p style="font-size: 14px; margin-bottom: 8px">My Events (n)</p>
-      <p style="font-size: 12px; margin-bottom: 8px">1. Environmental</p>
-      <p style="font-size: 12px; margin-bottom: 8px">2. Children and Young People</p>
-      <p style="font-size: 12px; margin-bottom: 8px">3. Homeless</p>
-      <p style="font-size: 12px; margin-bottom: 8px">Future Events</p>
+      <!-- Possible symbols to represent the categories
+      <i class="fas fa-leaf"></i>
+      <i class="fas fa-baby"></i>
+      <i class="fas fa-wheelchair"></i>
+      <i class="fas fa-heartbeat"></i>
+      <i class="fas fa-house-damage"></i>
+      <i class="fas fa-paw"></i>
+      <i class="fas fa-book-open"></i>
+      <i class="fas fa-music"></i>
+      <i class="fas fa-minus"></i>
+      -->
+
+      <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px">My Events ( 23 )</h4>
+      <p style="font-size: 12px; margin-bottom: 8px">1. Environmental ( 12 )</p>
+      <p style="font-size: 12px; margin-bottom: 8px">2. Children and Young People ( 6 )</p>
+      <p style="font-size: 12px; margin-bottom: 8px">3. Homeless ( 3 )</p>
+      <p style="font-size: 12px; margin-bottom: 8px">Future Events ( 3 )</p>
+
     </div>
 
     <div style="padding: 10px">
@@ -28,7 +41,7 @@
     </div>
   </div>
 
-  <div style="width: 550px; min-width: 550px; margin: 0 10px">
+  <div style="width: 520px; min-width: 520px; margin: 0 10px">
     <div id="items-list">
       <%= render partial: "item", collection: @items %>
     </div>
@@ -37,24 +50,26 @@
 
   <div style="width: 200px; min-width: 200px; height: fit-content; margin: 0 10px; position: sticky; top: 90px">
     <div style="padding: 10px; margin-bottom: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
-      <h2 style="font-size: 22px">Sugestions</h2>
+      <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px">Sugestions</h4>
 
       <% @organizations_recommended.each do |org| %>
         <div>
-          <h6><%= org.name %></p>
+          <p style="font-size: 13px; text-indent: 5px; margin-bottom: 0"><%= org.name %></p>
+          <p style="font-size: 12px; text-indent: 8px; margin-bottom: 10px">Environmental</p>
         </div>
       <% end %>
-      <a href="#">View all recommendations</a>
+      <a href="#">View all</a>
     </div>
 
     <div style="padding: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
-      <h2 style="font-size: 22px">Events near you</h2>
+      <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px">Events near you</h4>
 
       <% @near_events.each do |event| %>
         <div style="margin-bottom: 16px">
-          <h6><%= event.organization.name %></h6>
-          <p style="font-size: 14px; margin-bottom: 8px"><%= event.title %></p>
-          <p style="font-size: 14px; margin-bottom: 8px"><%= event.date.strftime("%d %b, %Y (%l%p)") %></p>
+          <p style="font-size: 13px; font-weight: 600; margin-bottom: 0"><%= event.title %></p>
+          <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0"><%= event.organization.name %></p>
+          <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0"><%= event.location %></p>
+          <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0"><%= event.date.strftime("%d %b, %Y (%l%p)") %></p>
         </div>
       <% end %>
     </div>
