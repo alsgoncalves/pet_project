@@ -6,6 +6,10 @@ const navSlide = () => {
   const avatarLinks = document.querySelector('.avatar-links')
 
   const burgerClick= burger.addEventListener('click', () => {
+    if (avatarLinks.classList.contains("avatar-links-active")) {
+      avatarLinks.classList.remove("avatar-links-active");
+    };
+
     // Toogle Nav
     nav.classList.toggle('nav-active');
 
@@ -22,6 +26,10 @@ const navSlide = () => {
   });
 
   const avatarClick = avatar.addEventListener('click', () => {
+    if (nav.classList.contains("nav-active")) {
+      nav.classList.toggle("nav-active");
+    };
+
     avatarLinks.classList.toggle('avatar-links-active');
   });
 }
