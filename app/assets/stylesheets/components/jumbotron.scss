@@ -1,19 +1,28 @@
 .jumbotron-fluid{
   margin-top: 100px;
-  background-color: $orange
+  background-color: $white;
+  background-size: cover;
+  background-position: left;
+
+}
+
+.fa-map-marker-alt{
+  color: $green;
+  font-size: 90px;
 }
 
 .jumbotron-fluid h1{
   padding-top: 50px;
-  color: $white;
+  color: $orange;
 }
 
 .jumbotron-fluid h6{
-  color: $white;
+  color: $orange;
 }
 
 .jumbotron-fluid p{
-  color: $white;
+  color: $orange;
+  margin-left: 26px;
 }
 
 

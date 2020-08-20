@@ -2,15 +2,13 @@
 	margin-top: 80px;
   height: 50vh;
 	min-height: 300px;
-	background-image: linear-gradient(rgba(135,206,235, 0.4),rgba(255,69,0,0.4)), url("h-volunteer.png");
-  background-size: cover;
-  background-position: center;
-	background-repeat: no-repeat;
+	background-color: $white;
+
 	h1{
-		color: $green;
+		color: $orange;
 	}
 	p{
-		color: $green;
+		color: $orange;
 	}
 }
 
@@ -56,8 +54,9 @@
 }
 
 #sidebar {
-  min-width: 300px;
-  max-width: 300px;
+	border-radius: 5px;
+  min-width: 280px;
+  max-width: 280px;
 	background: $orange;
   color: #fff;
   transition: all 0.3s;
@@ -148,6 +147,8 @@ a[data-toggle="collapse"] {
 	&.btn-primary{
 		background: $orange;
 		border-color: $orange;
+		margin-left: -30px;
+    margin-top: -70px;
 		&:hover, &:focus{
 			background: $orange !important;
 			border-color: $orange !important;
@@ -155,13 +156,6 @@ a[data-toggle="collapse"] {
 	}
 }
 
-#posts-show-page h2{
+#content h2{
 	color: $green;
-}
-
-#events-show-page h2{
-	color: $green;
-}
-.last{
-	
 }

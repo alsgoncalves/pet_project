@@ -2,7 +2,7 @@
   <div class="container h-100">
     <div class="row h-100 align-items-center">
       <div class="col-12 text-center">
-        <h1 class="font-weight-light"><%= @organization.name.upcase%></h1>
+        <h1 class="font-weight-light"><i class="fas fa-map-marker-alt"></i><%= @organization.name.upcase%></h1>
         <p class="lead"><%= @organization.address.capitalize%></p>
       </div>
     </div>
@@ -63,7 +63,6 @@
         <i class="fa fa-bars"></i>
         <span class="sr-only">Toggle Menu</span>
       </button>
-      <h2 class="mb-5 text-center"><%= @organization.name.upcase%></h2>
       <%= render "about_organization", organization: @organization %>
       <div class="container-fluid p-5">
         <h2 id="posts-show-page"class="text-center posts-showpage">Posts</h2>      
