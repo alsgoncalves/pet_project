@@ -50,8 +50,11 @@ organizations_photos_url.each do |url|
                       zip_code: Faker::Address.zip_code,
                       country: Faker::Address.country)
 
-  file = URI.open(url)
-  org.photos.attach(io: file, filename: 'nes.png', content_type: 'image/png')
+  file_photo = URI.open(url)
+  org.photos.attach(io: file_photo, filename: 'nes.png', content_type: 'image/png')
+
+  file_avatar = URI.open(url)
+  org.avatar.attach(io: file_avatar, filename: 'nes.png', content_type: 'image/png')
 
   puts "Creating #{org.name} ..."
   org.save!
