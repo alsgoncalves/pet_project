@@ -9,6 +9,8 @@ class PagesController < ApplicationController
   def feed
     @name = "#{current_user.first_name} #{current_user.last_name}"
 
+    @participations = current_user.participations.map(&:event)
+
     organizations_followed = current_user.favourites.map { |fav| fav.organization }
 
     posts = organizations_followed.map { |org| org.posts }.flatten
