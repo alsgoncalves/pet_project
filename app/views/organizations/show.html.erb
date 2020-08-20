@@ -1,85 +1,93 @@
-<!--Jumbotron-->
-<div class="container-fluid p-0">
-	<div class="jumbotron jumbotron-fluid">
-		<div class="container">
-			<p class="small"><%= link_to "<-- Back to all organizations", organizations_path(@organizations), {:style=>'color:#FFFFFF;', :hover=>'font-weight:bold;'}%></p>
-			<h1 class="display-4"><%= @organization.name.upcase%>
-				<% if !current_user.nil? && current_user.can_edit?(@organization)%>
-					<%= link_to (fa_icon "edit", class: 'mx-1', size: '1x', color: 'white' ), edit_organization_path(@organization.id) %>
-				<% end %>
-			</h1>
-			<h6>Location: <%= @organization.address.capitalize%></h6>
-      <%= cl_image_tag @organization.photos[0].key, class: "float-right img-jumb-show-page" %>
-		</div>
-	</div>
-</div>
+<header class="masthead">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-12 text-center">
+        <h1 class="font-weight-light"><%= @organization.name.upcase%></h1>
+        <p class="lead"><%= @organization.address.capitalize%></p>
+      </div>
+    </div>
+  </div>
+</header>
 
+<!--SideBar-->
+<div class="wrapper d-flex align-items-stretch">
+  <nav id="sidebar">
+    <div class="p-4 pt-5">
+      <%= cl_image_tag @organization.photos[0].key, class: "img-jumb-show-page" %>
+      <ul class="list-unstyled components mb-5">
+        <li class="active">
+          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+          <ul class="collapse list-unstyled" id="homeSubmenu">
+            <li>
+              <% if !current_user.nil? && current_user.can_edit?(@organization)%>
+                <%= link_to (fa_icon "edit", class: 'mx-1', size: '1x', color: 'white' ), edit_organization_path(@organization.id) %>
+              <% end %>
+            </li>
+            <li>
+              <% if !current_user.nil? && current_user.can_add_posts_for?(@organization) %>
+                <%= link_to "Add a new post", new_organization_post_path(@organization.id) %>
+              <% end %>
+            </li>
+            <li>
+              <% if !current_user.nil? && current_user.can_add_events_for?(@organization)%>
+                <%= link_to "Add a new event", new_organization_event_path(@organization.id) %>
+              <% end %>
+            </li>
+            <li>
+              <% if !current_user.nil? && current_user.can_add_admin_to?(@organization)%>
+                <%= link_to "Add a new admin", new_organization_admin_path(@organization.id) %>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+        <li>
+            <a href="#">About</a>
+        </li>
+        <li>
+          <a href="#posts-show-page">Posts</a>
+        </li>
+        <li>
+          <a href="#events-show-page">Events</a>
+        </li>
+      </ul>
+      <div class="last">
+			  <p class="small"><%= link_to "<-- Back to all organizations", organizations_path(@organizations), {:style=>'color:#FFFFFF;', :hover=>'font-weight:bold;'}%></p>
+      </div>
+    </div>
+  </nav>
 
-<!--Navegation-->	
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-	<li class="nav-item" role="presentation">
-		<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">General</a>
-	</li>
-	<li class="nav-item" role="presentation">
-		<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Posts</a>
-	</li>
-	<li class="nav-item" role="presentation">
-		<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Events</a>
-	</li>
-	<>
-	<li class="nav-item" role="presentation">
-		<a class="nav-link" id="pills-settings-tab" data-toggle="pill" href="#pills-settings" role="tab" aria-controls="pills-settings" aria-selected="false">Settings</a>
-	</li>
-</ul>
-
-<!--Page content-->
-<div class="tab-content" id="pills-tabContent">
-	<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-		<div class="container-fluid p-5">
-			<h4><%= @organization.description%></h4>
-		</div>
+  <!-- Page Content  -->
+  <div id="content" class="p-4 p-md-5">
+    <div class="container-fluid">
+      <button type="button" id="sidebarCollapse" class="btn btn-primary">
+        <i class="fa fa-bars"></i>
+        <span class="sr-only">Toggle Menu</span>
+      </button>
+      <h2 class="mb-5 text-center"><%= @organization.name.upcase%></h2>
+      <%= render "about_organization", organization: @organization %>
+      <div class="container-fluid p-5">
+        <h2 id="posts-show-page"class="text-center posts-showpage">Posts</h2>      
+        <% @organization.posts.each do |post|%>
+          <% if !post.nil?%>
+            <h4><%= post.title %><h4>
+            <h6>What will happen: <%= post.description %></h6>
+            <h6>Location: <%= post.location %></h6>
+            <h6>Date: <%= post.date.strftime("%d %B %Y") %></h6>
+          <% end %>
+        <% end %>  
+      </div>
+      <div class="container-fluid p-5">
+        <h2 id="events-show-page"class="text-center events-showpage">Events</h2>
+        <%@organization.events.each do |event|%>
+          <% if !event.nil?%>
+            <h4><%= event.title %><h4>
+            <h6>What will happen: <%= event.description %></h6>
+            <h6>People Needed: <%= event.part_count %></h6>
+            <h6>Location: <%= event.location %></h6>
+            <h6>Date: <%= event.date.strftime("%d %B %Y") %></h6>
+          <% end %>
+        <% end %>
+      </div>  
+    </div>
 	</div>
-	<!--Posts content-->
-	<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-		<h2 class="text-center posts-showpage">Posts</h2>
-		<div class="container-fluid p-5">
-			<% @organization.posts.each do |post|%>
-				<% if !post.nil?%>
-					<h4><%= post.title %><h4>
-					<h6>What will happen: <%= post.description %></h6>
-					<h6>Location: <%= post.location %></h6>
-					<h6>Date: <%= post.date.strftime("%d %B %Y") %></h6>
-				<% end %>
-			<% end %>
-			<% if !current_user.nil? && current_user.can_add_posts_for?(@organization) %>
-				<%= link_to "Add a new post", new_organization_post_path(@organization.id) %>
-			<% end %>
-		</div>	
-	</div>
-	<!--Events content-->
-	<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-		<h2 class="text-center events-showpage">Events</h2>
-		<div class="container-fluid p-5">
-			<%@organization.events.each do |event|%>
-				<% if !event.nil?%>
-					<h4><%= event.title %><h4>
-					<h6>What will happen: <%= event.description %></h6>
-					<h6>People Needed: <%= event.part_count %></h6>
-					<h6>Location: <%= event.location %></h6>
-					<h6>Date: <%= event.date.strftime("%d %B %Y") %></h6>
-				<% end %>
-			<% end %>
-			<% if !current_user.nil? && current_user.can_add_events_for?(@organization)%>
-				<%= link_to "Add a new event", new_organization_event_path(@organization.id) %>
-			<% end %>
-		</div>	
-	</div>
-	<div class="tab-pane fade" id="pills-settings" role="tabpanel" aria-labelledby="pills-settings-tab">
-		<h2 class="text-center events-showpage">Settings</h2>
-		<div class="container-fluid p-5">
-			<% if !current_user.nil? && current_user.can_add_events_for?(@organization)%>
-				<%= link_to "Add a new event", new_organization_event_path(@organization.id) %>
-			<% end %>
-		</div>	
-	</div>
-</div>
+</div>  
