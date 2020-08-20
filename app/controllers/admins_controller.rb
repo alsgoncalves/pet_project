@@ -3,7 +3,7 @@ class AdminsController < ApplicationController
   def new
     @organization = Organization.find(params[:organization_id])
     @admin = Admin.new
-    authorize @admin
+    authorize @organization
   end
 
   def create
