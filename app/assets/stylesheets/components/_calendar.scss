@@ -1,0 +1,77 @@
+.simple-calendar {
+    padding: 5px;
+
+  table {
+    color: black;
+    font-size: 10px;
+    background-color: white;
+    margin: 0;
+  }
+
+  /*
+  tr {}
+  */
+
+  th {
+    padding: 2px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  td {
+    padding: 6px;
+    vertical-align: top;
+    width: 14%;
+    border: 0 !important;
+  }
+
+  .calendar-heading {
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+  }
+
+  .thead {
+    border: 0 !important;
+  }
+
+  .day {
+    height: 10px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  /*
+  .wday-0 {}
+  .wday-1 {}
+  .wday-2 {}
+  .wday-3 {}
+  .wday-4 {}
+  .wday-5 {}
+  .wday-6 {}
+  */
+
+  .today {
+    background: #fb5012 !important;
+  }
+
+  /*
+  .past {}
+  .future {}
+
+  .start-date {}
+  */
+
+  .prev-month, .next-month {
+    background: rgb(200, 200, 200);
+  }
+
+  /*
+  .current-month {}
+  */
+
+  .has-events {
+    background: #00E0BB;
+  }
+}
