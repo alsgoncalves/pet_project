@@ -24,4 +24,8 @@ class OrganizationPolicy < ApplicationPolicy
   def new_event?
     user.can_add_events_for? record
   end
+
+  def new_admin?
+    user.can_add_admin_to? record
+  end
 end

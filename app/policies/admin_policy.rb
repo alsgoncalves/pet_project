@@ -6,6 +6,6 @@ class AdminPolicy < ApplicationPolicy
   end
 
   def create?
-    user.can_add_admins_to? record
+    user.can_add_admin_to? record
   end
 end

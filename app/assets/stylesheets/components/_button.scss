@@ -20,3 +20,13 @@ a.button-card-org:hover{
           transform: translateY(-5px);
   box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.3), 0 0 1px 0 rgba(0, 0, 0, 0.25);
 }
+
+//buttom sidebar
+button {
+	transition: .3s all ease;
+	&:hover, &:focus {
+		text-decoration: none !important;
+		outline: none !important;
+    box-shadow: none !important;
+	}
+}
