@@ -73,3 +73,6 @@ gem 'geocoder'
 
 # Add pagination
 gem 'will_paginate'
+
+# Calendar
+gem "simple_calendar", "~> 2.0"
