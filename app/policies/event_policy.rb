@@ -3,9 +3,15 @@ class EventPolicy < ApplicationPolicy
     def resolve
       scope.all
     end
-
-    def show
-      true
-    end
   end
+
+  def new_participation?
+    true
+  end
+
+  def show?
+    true
+  end
+
+
 end
