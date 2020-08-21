@@ -21,5 +21,10 @@ class PagesController < ApplicationController
     @organizations_recommended = (Organization.all - organizations_followed).first(3)
 
     @near_events = events.first(3)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 end

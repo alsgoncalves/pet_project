@@ -3,3 +3,5 @@ $("#items-list").append('<%= j render partial: "item", collection: @items %>');
 <% if @items.next_page %>
   $('.pagination').replaceWith('<%= j will_paginate(@items) %>');
 <% end %>
+
+$("#events_calendar").html("<%= j render partial: "calendar" %>");
