@@ -8,6 +8,8 @@ class Organization < ApplicationRecord
   has_many_attached :photos
   has_one_attached :avatar
 
+  belongs_to :category
+
   # Model validations
   validates :name,          presence: true, length: { minimum: 2 }
   validates :address,       presence: true, length: { minimum: 2 }
