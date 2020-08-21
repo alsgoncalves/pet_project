@@ -1,5 +1,12 @@
-$("#items-list").append('<%= j render partial: "item", collection: @items %>');
+<!-- If the the start_date is present on the params, then update the calendar partial -->
+<!-- otherwise add more items to the feed -->
+<% if params["start_date"].present? %>
+  $("#events_calendar").html("<%= j render partial: "calendar" %>");
 
-<% if @items.next_page %>
-  $('.pagination').replaceWith('<%= j will_paginate(@items) %>');
+<% else %>
+  $("#items-list").append('<%= j render partial: "item", collection: @items %>');
+
+  <% if @items.next_page %>
+    $('.pagination').replaceWith('<%= j will_paginate(@items) %>');
+  <% end %>
 <% end %>
