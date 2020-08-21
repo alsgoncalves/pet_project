@@ -24,6 +24,29 @@ end
 
 puts "Users created: #{User.all.count}"
 
+
+categories = [
+  ["Environment", "fas fa-leaf"],
+  ["Animal", "fas fa-paw"],
+  ["Elderly and Disabled", "fas fa-wheelchair"],
+  ["Children and Young People" ,"fas fa-baby"],
+  ["Homeless", "fas fa-house-damage"],
+  ["Education", "fas fa-book-open"],
+  ["Health", "fas fa-heartbeat"],
+  ["Culture", "fas fa-music"],
+  ["Other", "fas fa-minus"]
+]
+
+categories.each do |category|
+  new_category = Category.new(name: category[0], icon: category[1])
+  new_category.save
+
+  puts "Created the category: #{new_category.name}..."
+end
+
+puts "Categories created: #{Category.all.count}"
+
+
 organizations_photos_url = [
   'https://images.unsplash.com/photo-1570358934836-6802981e481e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80',
   'https://images.unsplash.com/photo-1510395839401-f2ec7a07bbb5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80',
@@ -45,7 +68,7 @@ organizations_photos_url.each do |url|
                       email: Faker::Internet.email,
                       phone_number: Faker::PhoneNumber.cell_phone,
                       description: Faker::Lorem.paragraph,
-                      category: "Others",
+                      category: Category.all.sample,
                       city: Faker::Address.city,
                       zip_code: Faker::Address.zip_code,
                       country: Faker::Address.country)
