@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_21_213647) do
+ActiveRecord::Schema.define(version: 2020_08_21_214706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,7 +93,6 @@ ActiveRecord::Schema.define(version: 2020_08_21_213647) do
     t.string "address", null: false
     t.string "phone_number", null: false
     t.string "email", null: false
-    t.string "category", null: false
     t.text "description", null: false
     t.string "city", null: false
     t.string "zip_code", null: false
@@ -103,6 +102,8 @@ ActiveRecord::Schema.define(version: 2020_08_21_213647) do
     t.boolean "is_deleted", default: false, null: false
     t.float "latitude"
     t.float "longitude"
+    t.bigint "category_id", null: false
+    t.index ["category_id"], name: "index_organizations_on_category_id"
   end
 
   create_table "participations", force: :cascade do |t|
@@ -147,6 +148,7 @@ ActiveRecord::Schema.define(version: 2020_08_21_213647) do
   add_foreign_key "events", "organizations"
   add_foreign_key "favourites", "organizations"
   add_foreign_key "favourites", "users"
+  add_foreign_key "organizations", "categories"
   add_foreign_key "participations", "events"
   add_foreign_key "participations", "users"
   add_foreign_key "posts", "organizations"
