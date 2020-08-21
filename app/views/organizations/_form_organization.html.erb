@@ -4,13 +4,7 @@
       <%= simple_form_for organization do |f| %>
         <%= f.input :name %>
         <%= f.input :description %>
-        <%= f.input :category, :collection => [
-          'Charitable Orientation',
-          'Service Orientation',
-          'Participatory Orientation',
-          'Empowering Orientation',
-          'Others'
-        ] %>
+        <%= f.association :category, label_method: :name %>
         <%= f.input :phone_number %>
         <%= f.input :email %>
         <%= f.input :address %>
