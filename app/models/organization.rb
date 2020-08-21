@@ -16,7 +16,6 @@ class Organization < ApplicationRecord
   validates :city,          presence: true, length: { minimum: 2 }
   validates :phone_number,  presence: true, length: { minimum: 9 }
   validates :email,         presence: true, length: { minimum: 2 } # Missing the Regex validation
-  validates :category,      presence: true, length: { minimum: 2 } # Provides a list to choose from
   validates :description,   presence: true, length: { minimum: 5 }
 
   # Get the Organization's coordinates based on the address and city provided by the user
