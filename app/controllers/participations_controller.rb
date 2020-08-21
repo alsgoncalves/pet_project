@@ -17,7 +17,7 @@ class ParticipationsController < ApplicationController
   end
 
   def destroy
-    participation = Participation.find_by_event_id(params[:event_id])
+    participation = Participation.find_by(event_id: params[:event_id], user_id: current_user.id).first
     authorize participation
 
     participation.destroy
