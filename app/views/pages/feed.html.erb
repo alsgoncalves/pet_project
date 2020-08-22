@@ -9,15 +9,31 @@
 
     <div style="padding: 10px; border-bottom: 1px solid rgb(180, 180, 180)">
       <div style="margin-bottom: 12px">
-        <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px">My Organizations ( <%= @num_org_followed %> )</h4>
+        <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px">
+          My Organizations <%= @num_org_followed.zero? ? "" : "( #{@num_org_followed} )" %>
+        </h4>
 
-        <% @top_categories.each_with_index do |array, index| %>
-          <p style="font-size: 12px; text-indent: 5px; margin-bottom: 4px"> <%= "#{index + 1}. #{array.first} ( #{array.second} )" %> </p>
+        <% if @num_org_followed.zero? %>
+          <p style="font-size: 12px; text-indent: 5px; margin-bottom: 4px">No Organizations followed</p>
+
+        <% else %>
+          <% @top_categories.each_with_index do |array, index| %>
+            <p style="font-size: 12px; text-indent: 5px; margin-bottom: 4px">
+              <%= "#{index + 1}. #{array.first} ( #{array.second} )" %>
+            </p>
+          <% end %>
         <% end %>
       </div>
 
-      <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px">My Events ( <%= @num_my_participations %> )</h4>
-      <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0">Future Events ( <%= @num_my_future_participations %> )</p>
+      <div>
+        <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px">
+          My Events <%= @num_my_participations.zero? ? "" : "( #{@num_my_participations} )" %>
+        </h4>
+
+        <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0">
+          <%= @num_my_future_participations.zero? ? "No scheduled events" : "Future Events ( #{@num_my_future_participations} )" %>
+        </p>
+      </div>
     </div>
 
     <div id="events_calendar">
