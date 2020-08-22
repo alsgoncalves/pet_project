@@ -4,18 +4,20 @@
 
       <%= avatar_large(current_user) %>
 
-      <h3 style="font-size: 16px; margin: 12px 0 0"><%= @name %></h3>
+      <h3 style="font-size: 16px; margin: 12px 0 0"><%= @user_name %></h3>
     </div>
 
     <div style="padding: 10px; border-bottom: 1px solid rgb(180, 180, 180)">
-      <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px">My Organizations ( 12 )</h4>
-      <p style="font-size: 12px; text-indent: 5px; margin-bottom: 4px">2. Environmental ( 6 )</p>
-      <p style="font-size: 12px; text-indent: 5px; margin-bottom: 4px">2. Children and Young People ( 3 )</p>
-      <p style="font-size: 12px; text-indent: 5px; margin-bottom: 12px">3. Elderly and disabled ( 2 )</p>
+      <div style="margin-bottom: 12px">
+        <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px">My Organizations ( <%= @num_org_followed %> )</h4>
 
-      <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px">My Events ( 23 )</h4>
-      <p style="font-size: 12px; text-indent: 5px; margin-bottom: 4px">Future Events ( 3 )</p>
+        <% @top_categories.each_with_index do |array, index| %>
+          <p style="font-size: 12px; text-indent: 5px; margin-bottom: 4px"> <%= "#{index + 1}. #{array.first} ( #{array.second} )" %> </p>
+        <% end %>
+      </div>
 
+      <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px">My Events ( <%= @num_my_participations %> )</h4>
+      <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0">Future Events ( <%= @num_my_future_participations %> )</p>
     </div>
 
     <div id="events_calendar">

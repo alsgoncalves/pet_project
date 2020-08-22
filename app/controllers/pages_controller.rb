@@ -8,10 +8,10 @@ class PagesController < ApplicationController
 
   def feed
     # User Info Box
-    @name = "#{current_user.first_name} #{current_user.last_name}"
+    @user_name = "#{current_user.first_name} #{current_user.last_name}"
 
     org_followed = current_user.favourites.map { |fav| fav.organization }
-    @org_followed_num = org_followed.size
+    @num_org_followed = org_followed.size
 
     # Create an array of arrays where the first element is the name of the category and the second
     # is the number of organizations followed in that category; sorted by the second argument (DESC)
@@ -22,8 +22,8 @@ class PagesController < ApplicationController
     @top_categories = org_followed_by_category.first(num_top_categories)
 
     @my_participations = current_user.participations.map(&:event)
-    @my_participations_num = @my_participations.size
-    @my_future_participations_num = @my_participations.reject { |event| event.date < DateTime.tomorrow.beginning_of_day }.size
+    @num_my_participations = @my_participations.size
+    @num_my_future_participations = @my_participations.reject { |event| event.date < DateTime.tomorrow.beginning_of_day }.size
 
 
     # User Feed
