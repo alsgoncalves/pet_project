@@ -1,5 +1,5 @@
 .simple-calendar {
-    padding: 5px;
+  padding: 5px;
 
   table {
     color: black;
@@ -16,13 +16,14 @@
     padding: 2px;
     text-align: center;
     text-transform: uppercase;
+    border-bottom: none !important;
   }
 
   td {
-    padding: 6px;
-    vertical-align: top;
     width: 14%;
-    border: 0 !important;
+    padding: 4px 5px 8px;
+    vertical-align: top;
+    border: 1px solid white !important;
   }
 
   .calendar-heading {
@@ -53,7 +54,8 @@
   */
 
   .today {
-    background: #fb5012 !important;
+    background: linear-gradient(25deg, rgba(255,125,77,0.1) 0%, rgba(255,125,77,0.4) 25%, rgba(255,125,77,0.8) 50%, rgba(255,125,77,0.8) 60%, rgba(255,125,77,0.7) 80%, rgba(255,125,77,0.1) 100%);
+    border-radius: 10px;
   }
 
   /*
@@ -64,7 +66,7 @@
   */
 
   .prev-month, .next-month {
-    background: rgb(200, 200, 200);
+    background: rgb(220, 220, 220);
   }
 
   /*
@@ -72,6 +74,14 @@
   */
 
   .has-events {
-    background: #00E0BB;
+    background-image: url(logo-marker-blue.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .today.has-events {
+    background-image: url(logo-marker-orange.png) !important;
+    background-color: white !important;
   }
 }
