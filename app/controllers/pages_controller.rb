@@ -7,20 +7,23 @@ class PagesController < ApplicationController
   end
 
   def feed
+    # User Info Box
     @name = "#{current_user.first_name} #{current_user.last_name}"
 
-    @participations = current_user.participations.map(&:event)
+    @my_participations = current_user.participations.map(&:event)
 
-    organizations_followed = current_user.favourites.map { |fav| fav.organization }
+    # User Feed
+    org_followed = current_user.favourites.map { |fav| fav.organization }
 
-    posts = organizations_followed.map { |org| org.posts }.flatten
-    events = organizations_followed.map { |org| org.events }.flatten
+    posts_followed = org_followed.map { |org| org.posts }.flatten
+    events_followed = org_followed.map { |org| org.events }.flatten
 
-    @items = (posts + events).sort_by { |x| x.created_at }.paginate(page: params[:page], per_page: 10)
+    @feed_items = (posts_followed + events_followed).sort_by { |x| x.created_at }.paginate(page: params[:page], per_page: 10)
 
-    @organizations_recommended = (Organization.all - organizations_followed).first(3)
+    # Sugestions Box
+    @org_recommended = (Organization.all - org_followed).first(3)
 
-    @near_events = events.first(3)
+    @events_near = events_followed.first(3)
 
     respond_to do |format|
       format.html
