@@ -1,7 +1,6 @@
 <div style="display: flex; justify-content: center; padding: 20px 10px; margin-top: 70px">
   <div style="width: 240px; min-width: 240px; margin: 0 10px; height: fit-content; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); position: sticky; top: 90px">
     <div style="display: flex; flex-direction: column; align-items: center; padding: 10px; border-bottom: 1px solid rgb(180, 180, 180)">
-
       <%= avatar_large(current_user) %>
 
       <h3 style="font-size: 16px; margin: 12px 0 0"><%= @user_name %></h3>
@@ -85,3 +84,11 @@
     </div>
   </div>
 </div>
+
+<script>
+  function popUpEventInfo(date) {
+    let events = '<%= @events_near.to_json.html_safe %>';
+    console.log(JSON.parse(events));
+    console.log(date)
+  }
+</script>
