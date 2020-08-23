@@ -86,9 +86,18 @@
 </div>
 
 <script>
-  function popUpEventInfo(date) {
-    let events = '<%= @events_near.to_json.html_safe %>';
-    console.log(JSON.parse(events));
-    console.log(date)
+  let myParticipations = JSON.parse(`<%= @my_participations.to_json.html_safe %>`);
+
+  function popUpEventInfo(day, month, year) {
+    let relevantDay = new Date(year, month - 1, day)
+    let dayParticipations = myParticipations.filter(participation => sameDay(relevantDay, new Date(participation.date)))
+    console.log(dayParticipations);
+    console.log(relevantDay);
+  }
+
+  function sameDay(d1, d2) {
+    return d1.getFullYear() === d2.getFullYear() &&
+      d1.getMonth() === d2.getMonth() &&
+      d1.getDate() === d2.getDate();
   }
 </script>
