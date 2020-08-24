@@ -41,10 +41,7 @@
         <%= render partial: "calendar" %>
       </div>
 
-      <div style="position: absolute; top: 0; right: -205px; min-width: 200px; max-width: 200px; min-height: 215px; max-height: 215px; background-color: white; padding: 8px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
-        <h6 id="date-event-popup" style="text-align: center; padding-bottom: 2px; border-bottom: 1px solid rgb(180, 180, 180)">Date...</h6>
-
-        <div id="content-event-popup"></div>
+      <div id="content-event-popup" style="position: absolute; top: 0; right: -205px; min-width: 200px; max-width: 200px; min-height: 215px; max-height: 215px; background-color: white; padding: 8px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
       </div>
     </div>
   </div>
@@ -96,12 +93,19 @@
     let selectedDateEvents = eventsToDisplay[`${zeroPaddedNumber(year, 4)}-${zeroPaddedNumber(month)}-${zeroPaddedNumber(day)}`]
     let boxContent = document.getElementById("content-event-popup");
 
-    document.getElementById("date-event-popup").innerHTML = `${day} ${monthNames[month - 1]}, ${year}`;
-
     if (selectedDateEvents.length == 0) {
-      boxContent.innerHTML = "<p>Nothing happening this day</p>"
+      boxContent.innerHTML = `<div id="headers-event-popup">
+                                <h6 id="date-event-popup">${monthNames[month - 1]} ${day}</h6>
+                              </div>
+                              <div class="tab-content">
+                                <p>Nothing happening this day</p>
+                              </div>`;
     } else {
-      boxContent.innerHTML = '<ul class="nav nav-tabs" style="position: static; min-height: 0"></ul><div class="tab-content"></div>';
+      boxContent.innerHTML = `<div id="headers-event-popup">
+                                <h6 id="date-event-popup">${monthNames[month - 1]} ${day}</h6>
+                                <ul class="nav nav-tabs" style="position: static; min-height: 0"></ul>
+                              </div>
+                              <div class="tab-content"></div>`;
 
       for (let i = 0; i < selectedDateEvents.length; i++) {
         let listLi = document.createElement('li');
@@ -110,7 +114,7 @@
         let anchor = document.createElement('a');
         anchor.setAttribute('data-toggle', 'tab');
         anchor.setAttribute('href', `#event${i + 1}`);
-        anchor.innerHTML = `Event ${i + 1}`;
+        anchor.innerHTML = `#${i + 1}`;
 
         listLi.appendChild(anchor);
         document.querySelector("div#content-event-popup ul.nav.nav-tabs").appendChild(listLi);
