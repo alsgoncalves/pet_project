@@ -38,9 +38,40 @@ class PagesController < ApplicationController
 
     @events_near = events_followed.first(3)
 
+
+    # Calendar side box
+    @calendar_events = calendar_top_events(events_followed, @my_participations)
+
     respond_to do |format|
       format.html
       format.js
     end
+  end
+
+  def calendar_top_events(events_followed, my_events)
+    result = {}
+    date_counter = Date.today.prev_month
+    other_events = events_followed - my_events
+
+    while date_counter <= Date.today.next_month
+      arr = my_events.select {|x| x.date.beginning_of_day == date_counter }.first(3).map { |event| transform_event(event, true)}
+      arr << other_events.select {|x| x.date.beginning_of_day == date_counter }.first(3 - arr.size).map { |event| transform_event(event, false)}
+
+      result[date_counter.strftime('%Y-%m-%d')] = arr.flatten
+      date_counter += 1
+    end
+
+    return result
+  end
+
+  def transform_event(event, participation)
+    return {
+      title: event.title,
+      org_name: event.organization.name,
+      location: event.location,
+      time: event.date,
+      part_count: event.part_count,
+      participating: participation
+    }
   end
 end

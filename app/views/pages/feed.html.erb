@@ -40,7 +40,7 @@
       <%= render partial: "calendar" %>
 
       <div style="position: absolute; top: 0; right: -205px; min-width: 200px; max-width: 200px; min-height: 200px; max-height: 200px; background-color: white; padding: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); visibility: visible">
-        <h6 id="date-event-popup" style="text-align: center; padding-bottom: 2px; border-bottom: 1px solid rgb(180, 180, 180)">Date...</h6>
+        <h6 id="date-event-popup" style="text-align: center; padding-bottom: 2px; border-bottom: 1px solid rgb(180, 180, 180)">...</h6>
         <div id="content-event-popup" style="padding-left: 5px"></div>
       </div>
     </div>
@@ -87,24 +87,21 @@
       "July", "August", "September", "October", "November", "December"
     ];
 
-  let myParticipations = JSON.parse(`<%= @my_participations.to_json.html_safe %>`);
+  let eventsToDisplay = JSON.parse(`<%= @calendar_events.to_json.html_safe %>`);
 
   function popUpEventInfo(day, month, year) {
-    let SelectedDate = new Date(year, month - 1, day)
-    let dayParticipations = myParticipations.filter(participation => sameDay(SelectedDate, new Date(participation.date)))
+    let selectedDateEvents = eventsToDisplay[`${zeroPaddedNumber(year, 4)}-${zeroPaddedNumber(month)}-${zeroPaddedNumber(day)}`]
+    let selectedtEventContent = `<p>${selectedDateEvents[0].title}</p>
+                                <p>${selectedDateEvents[0].org_name}</p>
+                                <p>${selectedDateEvents[0].location}</p>
+                                <p>${selectedDateEvents[0].time}</p>
+                                <p>${selectedDateEvents[0].part_count}</p>`;
 
-    document.getElementById("date-event-popup").innerHTML = `${SelectedDate.getDate()} ${monthNames[SelectedDate.getMonth()]}, ${SelectedDate.getFullYear()}`;
-
-    let selectedtEventContent = `<p>${dayParticipations[0].title}</p>
-                                <p>${dayParticipations[0].location}</p>
-                                <p>${dayParticipations[0].part_count}</p>`;
-
+    document.getElementById("date-event-popup").innerHTML = `${day} ${monthNames[month - 1]}, ${year}`;
     document.getElementById("content-event-popup").innerHTML = selectedtEventContent;
   }
 
-  function sameDay(d1, d2) {
-    return d1.getFullYear() === d2.getFullYear() &&
-      d1.getMonth() === d2.getMonth() &&
-      d1.getDate() === d2.getDate();
+  function zeroPaddedNumber(num, digits = 2) {
+    return ("0000" + num).slice(-digits);
   }
 </script>
