@@ -41,31 +41,10 @@
         <%= render partial: "calendar" %>
       </div>
 
-      <div style="position: absolute; top: 0; right: -225px; min-width: 220px; max-width: 220px; min-height: 215px; max-height: 215px; background-color: white; padding: 8px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
-        <h6 id="date-event-popup" style="text-align: center; padding-bottom: 2px; border-bottom: 1px solid rgb(180, 180, 180)">10 March, 2020</h6>
+      <div style="position: absolute; top: 0; right: -205px; min-width: 200px; max-width: 200px; min-height: 215px; max-height: 215px; background-color: white; padding: 8px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
+        <h6 id="date-event-popup" style="text-align: center; padding-bottom: 2px; border-bottom: 1px solid rgb(180, 180, 180)">Date...</h6>
 
-        <div>
-          <ul class="nav nav-tabs" style="position: static; min-height: 0">
-            <li class="active"><a data-toggle="tab" href="#event1">Event1</a></li>
-            <li><a data-toggle="tab" href="#event2">Event 2</a></li>
-            <li><a data-toggle="tab" href="#event3">Event 3</a></li>
-          </ul>
-
-          <div class="tab-content">
-            <div id="event1" class="tab-pane fade active in show">
-              <h3>Event 1</h3>
-              <p>Event content...</p>
-            </div>
-            <div id="event2" class="tab-pane fade">
-              <h3>Event 2</h3>
-              <p>Event content...</p>
-            </div>
-            <div id="event3" class="tab-pane fade">
-              <h3>Event 3</h3>
-              <p>Event content...</p>
-            </div>
-          </div>
-        </div>
+        <div id="content-event-popup"></div>
       </div>
     </div>
   </div>
@@ -115,14 +94,52 @@
 
   function popUpEventInfo(day, month, year) {
     let selectedDateEvents = eventsToDisplay[`${zeroPaddedNumber(year, 4)}-${zeroPaddedNumber(month)}-${zeroPaddedNumber(day)}`]
-    let selectedtEventContent = `<p>${selectedDateEvents[0].title}</p>
-                                <p>${selectedDateEvents[0].org_name}</p>
-                                <p>${selectedDateEvents[0].location}</p>
-                                <p>${selectedDateEvents[0].time}</p>
-                                <p>${selectedDateEvents[0].part_count}</p>`;
+    let boxContent = document.getElementById("content-event-popup");
 
     document.getElementById("date-event-popup").innerHTML = `${day} ${monthNames[month - 1]}, ${year}`;
-    document.getElementById("content-event-popup").innerHTML = selectedtEventContent;
+
+    if (selectedDateEvents.length == 0) {
+      boxContent.innerHTML = "<p>Nothing happening this day</p>"
+    } else {
+      boxContent.innerHTML = '<ul class="nav nav-tabs" style="position: static; min-height: 0"></ul><div class="tab-content"></div>';
+
+      for (let i = 0; i < selectedDateEvents.length; i++) {
+        let listLi = document.createElement('li');
+        if (i == 0) listLi.className = 'active';
+
+        let anchor = document.createElement('a');
+        anchor.setAttribute('data-toggle', 'tab');
+        anchor.setAttribute('href', `#event${i + 1}`);
+        anchor.innerHTML = `Event ${i + 1}`;
+
+        listLi.appendChild(anchor);
+        document.querySelector("div#content-event-popup ul.nav.nav-tabs").appendChild(listLi);
+
+        let contentDiv = document.createElement('div');
+        contentDiv.id = `event${i + 1}`;
+        contentDiv.className = (i == 0 ? "tab-pane fade active in show" : "tab-pane fade");
+
+        let selectedEvent = selectedDateEvents[i];
+
+        let contentParaTitle = document.createElement('p');
+        contentParaTitle.innerHTML = selectedEvent.title;
+        contentDiv.appendChild(contentParaTitle);
+
+        let contentParaLocation = document.createElement('p');
+        contentParaLocation.innerHTML = selectedEvent.location;
+        contentDiv.appendChild(contentParaLocation);
+
+        let contentParaTime = document.createElement('p');
+        contentParaTime.innerHTML = selectedEvent.time;
+        contentDiv.appendChild(contentParaTime);
+
+        let contentParaPart = document.createElement('p');
+        contentParaPart.innerHTML = selectedEvent.part_count;
+        contentDiv.appendChild(contentParaPart);
+
+        document.querySelector("div#content-event-popup div.tab-content").appendChild(contentDiv);
+      }
+    }
   }
 
   function zeroPaddedNumber(num, digits = 2) {
