@@ -36,12 +36,36 @@
       </div>
     </div>
 
-    <div id="events_calendar" style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); position: sticky; top: 90px">
-      <%= render partial: "calendar" %>
+    <div style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); position: sticky; top: 90px">
+      <div id="events_calendar">
+        <%= render partial: "calendar" %>
+      </div>
 
-      <div style="position: absolute; top: 0; right: -205px; min-width: 200px; max-width: 200px; min-height: 200px; max-height: 200px; background-color: white; padding: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); visibility: visible">
-        <h6 id="date-event-popup" style="text-align: center; padding-bottom: 2px; border-bottom: 1px solid rgb(180, 180, 180)">...</h6>
-        <div id="content-event-popup" style="padding-left: 5px"></div>
+      <div style="position: absolute; top: 0; right: -225px; min-width: 220px; max-width: 220px; min-height: 215px; max-height: 215px; background-color: white; padding: 8px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
+        <h6 id="date-event-popup" style="text-align: center; padding-bottom: 2px; border-bottom: 1px solid rgb(180, 180, 180)">10 March, 2020</h6>
+
+        <div>
+          <ul class="nav nav-tabs" style="position: static; min-height: 0">
+            <li class="active"><a data-toggle="tab" href="#event1">Event1</a></li>
+            <li><a data-toggle="tab" href="#event2">Event 2</a></li>
+            <li><a data-toggle="tab" href="#event3">Event 3</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div id="event1" class="tab-pane fade active in show">
+              <h3>Event 1</h3>
+              <p>Event content...</p>
+            </div>
+            <div id="event2" class="tab-pane fade">
+              <h3>Event 2</h3>
+              <p>Event content...</p>
+            </div>
+            <div id="event3" class="tab-pane fade">
+              <h3>Event 3</h3>
+              <p>Event content...</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
