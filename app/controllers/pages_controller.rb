@@ -68,6 +68,7 @@ class PagesController < ApplicationController
     return {
       title: event.title,
       org_name: event.organization.name,
+      org_cat_icon: event.organization.category.icon,
       location: event.location,
       time: event.date,
       part_count: event.part_count,
