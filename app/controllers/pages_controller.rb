@@ -50,10 +50,17 @@ class PagesController < ApplicationController
 
   def calendar_top_events(events_followed, my_events)
     result = {}
-    date_counter = Date.today.prev_month
+
+    if params[:start_date].present?
+      start_date = Date.parse params[:start_date]
+    else
+      start_date = Date.today
+    end
+
+    date_counter = start_date.prev_month
     other_events = events_followed - my_events
 
-    while date_counter <= Date.today.next_month
+    while date_counter <= start_date.next_month
       arr = my_events.select {|x| x.date.beginning_of_day == date_counter }.first(3).map { |event| transform_event(event, true)}
       arr << other_events.select {|x| x.date.beginning_of_day == date_counter }.first(3 - arr.size).map { |event| transform_event(event, false)}
 
