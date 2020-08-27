@@ -13,6 +13,10 @@
   border: 1px solid rgb(180, 180, 180);
   box-shadow: 0 0 2px rgb(180, 180, 180);
 
+  transition: visibility 0.3s, opacity 0.3s;
+  visibility: hidden;
+  opacity: 0;
+
   #headers-event-popup {
     display: flex;
     justify-content: space-between;
@@ -33,6 +37,7 @@
       width: 70%;
       min-height: 0;
       border: none;
+      transition: none;
 
       li.nav-item > a.nav-link {
         min-width: 34.5px;

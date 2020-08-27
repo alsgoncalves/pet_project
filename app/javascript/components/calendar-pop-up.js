@@ -12,6 +12,7 @@ function calendarPopUp() {
       let eventPopUp = document.getElementById("content-event-popup");
       if (eventPopUp.style.visibility == "hidden") {
         eventPopUp.style.visibility = "visible";
+        eventPopUp.style.opacity = "1";
       }
       });
   });
@@ -22,6 +23,7 @@ function calendarPopUp() {
     if (!isInside) {
       let eventPopUp = document.getElementById("content-event-popup");
       eventPopUp.style.visibility = "hidden";
+      eventPopUp.style.opacity = "0";
     }
   });
 
