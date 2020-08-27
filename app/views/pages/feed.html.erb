@@ -103,9 +103,11 @@
 
     // The pop-up box format will depend if it a certain date has events or not
     if (selectedDateEvents == null || selectedDateEvents.length == 0) {
+    
       document.querySelector("div#content-event-popup div.tab-content").innerHTML = '<p>Nothing happening this day</p>';
 
     } else {
+    
       for (let i = 0; i < selectedDateEvents.length; i++) {
         let selectedEvent = selectedDateEvents[i];
 
