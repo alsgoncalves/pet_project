@@ -40,7 +40,7 @@ class PagesController < ApplicationController
 
 
     # Calendar side box
-    @calendar_events = calendar_top_events(events_followed, @my_participations)
+    gon.calendar_events = calendar_top_events(events_followed, @my_participations)
 
     respond_to do |format|
       format.html
