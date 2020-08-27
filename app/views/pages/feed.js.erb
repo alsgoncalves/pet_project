@@ -2,7 +2,8 @@
 <!-- otherwise add more items to the feed -->
 <% if params["start_date"].present? %>
   $("#events_calendar").html("<%= j render partial: "calendar" %>");
-  eventsToDisplay = JSON.parse(`<%= @calendar_events.to_json.html_safe %>`);
+  calendarPopUp();
+
 <% else %>
   $("#items-list").append('<%= j render partial: "feed_item", collection: @feed_items %>');
 
