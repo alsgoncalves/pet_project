@@ -84,9 +84,16 @@
             <h6>People Needed: <%= event.part_count %></h6>
             <h6>Location: <%= event.location %></h6>
             <h6>Date: <%= event.date.strftime("%d %B %Y") %></h6>
+            <% if current_user.nil? %>
+              <%= link_to "Participate", new_user_session_path %>
+              <% else %>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#participate_event">Participate</button>
+            <% end %>  
           <% end %>
         <% end %>
       </div>  
     </div>
 	</div>
-</div>  
+</div>
+
+<%= render "participate_event", event: @event %>
