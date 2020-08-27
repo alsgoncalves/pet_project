@@ -39,9 +39,10 @@ function calendarPopUp() {
 
         // Create the navigation headers
         let listLi = document.createElement('li');
-        if (i == 0) listLi.className = 'active';
+        listLi.className = ( i == 0 ? 'nav-item active': 'nav-item');
 
         let anchor = document.createElement('a');
+        anchor.className = ( i == 0 ? 'nav-link active show': 'nav-link');
         anchor.setAttribute('data-toggle', 'tab');
         anchor.setAttribute('href', `#event${i + 1}`);
         anchor.innerHTML = `<i class="${selectedEvent.org_cat_icon}"></i>`;
