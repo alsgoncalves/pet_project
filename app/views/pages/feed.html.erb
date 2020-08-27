@@ -82,6 +82,16 @@
 </div>
 
 <script>
+  let calendarDays = document.querySelectorAll("table.table-striped tbody tr td.day");
+
+  Array.prototype.forEach.call (calendarDays, function(selectedDay) {
+    selectedDay.addEventListener("click", function() {
+      popUpEventInfo(selectedDay.getAttribute("data-day"),
+                      selectedDay.getAttribute("data-month"),
+                      selectedDay.getAttribute("data-year"));
+    });
+  });
+
   const monthNames =
     [
       "Jan", "Feb", "Mar", "Apr", "May", "June",
@@ -96,8 +106,8 @@
     let boxContent = document.getElementById("content-event-popup");
 
     boxContent.innerHTML = `<div id="headers-event-popup">
-                              <h6 id="date-event-popup">${monthNames[month - 1]} ${day}</h6>
-                              <ul class="nav nav-tabs"></ul>
+                            <h6 id="date-event-popup">${monthNames[month - 1]} ${day}</h6>
+                            <ul class="nav nav-tabs"></ul>
                             </div>
                             <div class="tab-content"></div>`;
 
