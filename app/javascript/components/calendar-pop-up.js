@@ -3,10 +3,26 @@ function calendarPopUp() {
 
   Array.prototype.forEach.call (calendarDays, function(selectedDay) {
     selectedDay.addEventListener("click", function() {
+      // Populate the pop-up box with the relevant information
       PopulateEventInfo(selectedDay.getAttribute("data-day"),
                         selectedDay.getAttribute("data-month"),
                         selectedDay.getAttribute("data-year"));
+
+      // Make the pop-up box visible
+      let eventPopUp = document.getElementById("content-event-popup");
+      if (eventPopUp.style.visibility == "hidden") {
+        eventPopUp.style.visibility = "visible";
+      }
       });
+  });
+
+  window.addEventListener('click', function(event) {
+    let isInside = document.getElementById('events_calendar').contains(event.target) ||
+                   document.getElementById('content-event-popup').contains(event.target);
+    if (!isInside) {
+      let eventPopUp = document.getElementById("content-event-popup");
+      eventPopUp.style.visibility = "hidden";
+    }
   });
 
   const monthNames =
