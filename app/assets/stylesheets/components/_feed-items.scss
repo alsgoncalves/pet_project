@@ -1,0 +1,64 @@
+.feed-item-container {
+  padding: 15px 0 0;
+  margin-bottom: 10px;
+  border: 1px solid rgb(180, 180, 180);
+  box-shadow: 0 0 2px rgb(180, 180, 180);
+
+  p {
+    font-size: 14px !important;
+    margin: 0;
+  }
+
+  .feed-item-headers {
+    display: flex;
+    padding: 0 15px;
+    margin-bottom: 12px;
+
+    h6 {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    p {
+      color: rgb(100, 100, 100);
+    }
+  }
+
+  .feed-item-content {
+    padding: 0 15px 10px;
+
+    h5 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .feed-event-info-element {
+      display: flex;
+    }
+
+    .trix-content {
+      font-size: 13px;
+    }
+  }
+
+  .feed-item-actions {
+    display: flex;
+    padding: 0 0 5px;
+    border-top: 1px solid rgba(180, 180, 180, 0.6);
+    margin: 0 15px;
+
+    a {
+      display: flex;
+      padding: 5px 8px;
+      margin: 5px 15px 0 0;
+
+      i {
+        margin-top: 2px;
+      }
+
+      p {
+        margin-left: 5px;
+      }
+    }
+  }
+}

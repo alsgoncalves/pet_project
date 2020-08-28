@@ -1,20 +1,20 @@
-<div style="padding: 15px 0 0; margin-bottom: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
-  <div style="display: flex; padding: 0 15px; margin-bottom: 12px">
+<div class="feed-item-container">
+  <div class="feed-item-headers">
     <img src="<%= cl_image_path feed_item.organization.avatar.key, height: 1000, width: 1000, crop: :fill %>" alt="organization avatar" class="avatar-square">
 
     <div style="margin-left: 10px">
-      <h6 style="font-size: 18px; margin: 0"><%= feed_item.organization.name %></h6>
-      <p style="color: rgb(100, 100, 100); font-size: 14px; margin: 0"><%= time_ago_in_words(feed_item.created_at) %></p>
+      <h6><%= feed_item.organization.name %></h6>
+      <p><%= time_ago_in_words(feed_item.created_at) %></p>
     </div>
   </div>
 
   <% if feed_item.is_a? Post %>
-    <div style="padding: 0 15px">
-      <p style="font-size: 14px; margin: 0px"><%= feed_item.description %></p>
+    <div class="feed-item-content">
+      <p><%= feed_item.description %></p>
     </div>
 
     <% if feed_item.images.size == 1 %>
-      <img class="d-block w-100" src="<%= cl_image_path feed_item.images.first.key %>" alt="post image" style="margin-bottom: -1px">
+      <img src="<%= cl_image_path feed_item.images.first.key %>" alt="post image" class="d-block w-100" style="margin-bottom: -1px">
 
     <!-- Carroussel of Post images -->
     <% elsif feed_item.images.size > 1 %>
@@ -28,7 +28,7 @@
         <div class="carousel-inner">
           <% feed_item.images.each_with_index do |image, index| %>
             <div class="carousel-item <%= "active" if index.zero? %>">
-              <img class="d-block w-100" src="<%= cl_image_path image.key %>" alt="<%= index.ordinalize %> post image">
+              <img src="<%= cl_image_path image.key %>" alt="<%= index.ordinalize %> post image" class="d-block w-100">
             </div>
           <% end %>
         </div>
@@ -45,57 +45,54 @@
       </div>
     <% end %>
 
-    <div style="padding: 0 0 5px; margin: 0 15px; border-top: 1px solid rgba(180, 180, 180, 0.6); display: flex">
-      <%= link_to "#", style: "display: flex; margin: 5px 15px 0 0; padding: 5px 8px" do %>
-        <i class="fas fa-share" style="margin-top: 2px"></i>
-        <p style="margin: 0 0 0 5px">Share</p>
+    <div class="feed-item-actions">
+      <%= link_to "#" do %>
+        <i class="fas fa-share"></i>
+        <p>Share</p>
       <% end %>
 
-      <%= link_to "#", style: "display: flex; margin: 5px 0 0; padding: 5px 8px" do %>
-        <i class="fas fa-info-circle" style="margin-top: 2px"></i>
-        <p style="margin: 0 0 0 5px">More</p>
+      <%= link_to "#", style: "margin: 5px 0 0" do %>
+        <i class="fas fa-info-circle"></i>
+        <p>More</p>
       <% end %>
     </div>
 
   <% elsif feed_item.is_a? Event %>
-    <div style="padding: 0 15px">
-      <h5 style="font-size: 18px; margin-bottom: 12px"><%= feed_item.title %></h5>
+    <div class="feed-item-content">
+      <h5><%= feed_item.title %></h5>
 
-      <div style="display: flex">
+      <div class="feed-event-info-element">
         <i class="fas fa-map-marker-alt"></i>
-        <p style="font-size: 14px; margin: 0 0 8px 5px"><%= feed_item.location %></p>
+        <p style="margin: 0 0 8px 5px"><%= feed_item.location %></p>
       </div>
 
-      <div style="display: flex">
+      <div class="feed-event-info-element">
         <i class="fas fa-calendar"></i>
-        <p style="font-size: 14px; margin: 0 0 8px 5px"><%= feed_item.date.strftime("%d %b, %Y ( %l%p )") %></p>
+        <p style="margin: 0 0 8px 5px"><%= feed_item.date.strftime("%d %b, %Y ( %l%p )") %></p>
       </div>
 
-      <div style="display: flex">
+      <div class="feed-event-info-element">
         <i class="fas fa-user"></i>
-
-        <p style="font-size: 14px; margin: 0 0 12px 5px">
-          <%= feed_item.part_count %>
-          ( 2 spots avaliable )
-        </p>
+        <p style="margin: 0 0 12px 5px"><%= feed_item.part_count %> ( 2 spots avaliable )</p>
       </div>
-      <p style="font-size: 14px; margin: 0px"><%= feed_item.description %></p>
+
+      <p><%= feed_item.description %></p>
     </div>
 
-    <div style="padding: 0 0 5px; margin: 0 15px; border-top: 1px solid rgba(180, 180, 180, 0.6); display: flex">
-      <%= link_to "#", style: "display: flex; margin: 5px 15px 0 0; padding: 5px 8px" do %>
-        <i class="fas fa-hand-paper" style="margin-top: 2px"></i>
-        <p style="margin: 0 0 0 5px">Participate</p>
+    <div class="feed-item-actions">
+      <%= link_to "#" do %>
+        <i class="fas fa-hand-paper"></i>
+        <p>Participate</p>
       <% end %>
 
-      <%= link_to "#", style: "display: flex; margin: 5px 15px 0 0; padding: 5px 8px" do %>
-        <i class="fas fa-share" style="margin-top: 2px"></i>
-        <p style="margin: 0 0 0 5px">Share</p>
+      <%= link_to "#" do %>
+        <i class="fas fa-share"></i>
+        <p>Share</p>
       <% end %>
 
-      <%= link_to "#", style: "display: flex; margin: 5px 0 0; padding: 5px 8px" do %>
-        <i class="fas fa-info-circle" style="margin-top: 2px"></i>
-        <p style="margin: 0 0 0 5px">More</p>
+      <%= link_to "#", style: "margin: 5px 0 0" do %>
+        <i class="fas fa-info-circle"></i>
+        <p>More</p>
       <% end %>
     </div>
   <% end %>
