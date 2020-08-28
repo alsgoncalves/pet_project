@@ -28,11 +28,11 @@
 
         <div>
           <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px">
-            My Events <%= @num_my_participations.zero? ? "" : "( #{@num_my_participations} )" %>
+            My Events <%= @num_events_part.zero? ? "" : "( #{@num_events_part} )" %>
           </h4>
 
           <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0">
-            <%= @num_my_future_participations.zero? ? "No scheduled events" : "Future Events ( #{@num_my_future_participations} )" %>
+            <%= @num_future_events_part.zero? ? "No scheduled events" : "Future Events ( #{@num_future_events_part} )" %>
           </p>
         </div>
       </div>
