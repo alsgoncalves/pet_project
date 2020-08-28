@@ -1,9 +1,10 @@
 function calendarPopUp() {
   let calendarDays = document.querySelectorAll("table.table-striped tbody tr td.day");
 
+  // Display in a pop-up box the selected day's events info
   Array.prototype.forEach.call (calendarDays, function(selectedDay) {
     selectedDay.addEventListener("click", function() {
-      // Populate the pop-up box with the relevant information
+      // Populate the pop-up box with the events info
       PopulateEventInfo(selectedDay.getAttribute("data-day"),
                         selectedDay.getAttribute("data-month"),
                         selectedDay.getAttribute("data-year"));
@@ -14,9 +15,10 @@ function calendarPopUp() {
         eventPopUp.style.visibility = "visible";
         eventPopUp.style.opacity = "1";
       }
-      });
+    });
   });
 
+  // If the user clicks outside of the calendar or the calendar pop-up then close the pop-up
   window.addEventListener('click', function(event) {
     let isInside = document.getElementById('events_calendar').contains(event.target) ||
                    document.getElementById('content-event-popup').contains(event.target);
@@ -33,23 +35,27 @@ function calendarPopUp() {
       "July", "Aug", "Sept", "Oct", "Nov", "Dec"
     ];
 
-  // Use the gem "gon" in order to be able call the Pages Controller variable "calendar_events"
+  // Use the gem "gon" in order to call the Pages Controller variable "calendar_events"
   let eventsToDisplay = gon.calendar_events;
 
+  // Populate the pop-up box with the events info
   function PopulateEventInfo(day, month, year) {
-    // Create the layout of the pop-up box
-    let selectedDateEvents = eventsToDisplay[`${zeroPaddedNumber(year, 4)}-${zeroPaddedNumber(month)}-${zeroPaddedNumber(day)}`]
+    let dateString = `${zeroPaddedNumber(year, 4)}-${zeroPaddedNumber(month)}-${zeroPaddedNumber(day)}`;
+    let selectedDateEvents = eventsToDisplay[dateString];
     let boxContent = document.getElementById("content-event-popup");
 
+    // Clean the pop-up box content; leave the basic layout
     boxContent.innerHTML = `<div id="headers-event-popup">
                               <h6 id="date-event-popup">${monthNames[month - 1]} ${day}</h6>
                               <ul class="nav nav-tabs"></ul>
                             </div>
                             <div class="tab-content"></div>`;
 
-    // The pop-up box format will depend if it a certain date has events or not
+    let eventContent = document.querySelector("div#content-event-popup div.tab-content");
+
+    // The pop-up box format will depend on the presence, or not, of events on the selected date
     if (selectedDateEvents == null || selectedDateEvents.length == 0) {
-      document.querySelector("div#content-event-popup div.tab-content").innerHTML = '<p>Nothing happening this day</p>';
+      eventContent.innerHTML = '<p>Nothing happening this day</p>';
 
     } else {
       for (let i = 0; i < selectedDateEvents.length; i++) {
@@ -68,34 +74,31 @@ function calendarPopUp() {
         listLi.appendChild(anchor);
         document.querySelector("div#content-event-popup ul.nav.nav-tabs").appendChild(listLi);
 
-        // Create the content
+        // Create the Events content
         let contentDiv = document.createElement('div');
         contentDiv.id = `event${i + 1}`;
         contentDiv.className = (i == 0 ? "tab-pane fade active in show" : "tab-pane fade");
 
-        let contentParaTitle = document.createElement('p');
-        contentParaTitle.innerHTML = selectedEvent.title;
-        contentDiv.appendChild(contentParaTitle);
+        contentDiv.appendChild(paraCreator(selectedEvent.title))        // Appends the title
+        contentDiv.appendChild(paraCreator(selectedEvent.location));    // Appends the location
+        contentDiv.appendChild(paraCreator(selectedEvent.time));        // Appends the time
+        contentDiv.appendChild(paraCreator(selectedEvent.part_count));  // Appends the num of participants
 
-        let contentParaLocation = document.createElement('p');
-        contentParaLocation.innerHTML = selectedEvent.location;
-        contentDiv.appendChild(contentParaLocation);
-
-        let contentParaTime = document.createElement('p');
-        contentParaTime.innerHTML = selectedEvent.time;
-        contentDiv.appendChild(contentParaTime);
-
-        let contentParaPart = document.createElement('p');
-        contentParaPart.innerHTML = selectedEvent.part_count;
-        contentDiv.appendChild(contentParaPart);
-
-        document.querySelector("div#content-event-popup div.tab-content").appendChild(contentDiv);
+        eventContent.appendChild(contentDiv);
       }
     }
   }
 
+  // If a number has less digits than a certain number, then padd it with zeros
   function zeroPaddedNumber(num, digits = 2) {
     return ("0000" + num).slice(-digits);
+  }
+
+  // Returns a new paragraph element with the functions argument as its content
+  function paraCreator(content) {
+    let contentPara = document.createElement('p');
+    contentPara.innerHTML = content;
+    return contentPara;
   }
 }
 
