@@ -1,44 +1,38 @@
 <%= include_gon %>
 
-<div style="display: flex; justify-content: center; padding: 20px 10px; margin-top: 70px">
-  <div style="width: 240px; min-width: 240px; margin: 0 10px">
-    <div style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); margin-bottom: 10px">
-      <div style="display: flex; flex-direction: column; align-items: center; padding: 10px; border-bottom: 1px solid rgb(180, 180, 180)">
+<div class="feed-page-container">
+  <div class="user-box">
+    <div class="gray-border" style="margin-bottom: 10px">
+      <div class="user-box-headers">
         <%= avatar_large(current_user) %>
-        <h3 style="font-size: 16px; margin: 12px 0 0"><%= @user_name %></h3>
+        <h3><%= @user_name %></h3>
       </div>
 
-      <div style="padding: 10px; border-bottom: 1px solid rgb(180, 180, 180)">
+      <div class="user-box-info">
         <div style="margin-bottom: 12px">
-          <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px">
-            My Organizations <%= @num_org_followed.zero? ? "" : "( #{@num_org_followed} )" %>
-          </h4>
+          <h4>My Organizations <%= @num_org_followed.zero? ? "" : "( #{@num_org_followed} )" %></h4>
 
           <% if @num_org_followed.zero? %>
-            <p style="font-size: 12px; text-indent: 5px; margin-bottom: 4px">No Organizations followed</p>
+            <p>No Organizations followed</p>
 
           <% else %>
             <% @top_categories.each_with_index do |array, index| %>
-              <p style="font-size: 12px; text-indent: 5px; margin-bottom: 4px">
-                <%= "#{index + 1}. #{array.first} ( #{array.second} )" %>
-              </p>
+              <p><%= "#{index + 1}. #{array.first} ( #{array.second} )" %></p>
             <% end %>
           <% end %>
         </div>
 
         <div>
-          <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px">
-            My Events <%= @num_events_part.zero? ? "" : "( #{@num_events_part} )" %>
-          </h4>
+          <h4>My Events <%= @num_events_part.zero? ? "" : "( #{@num_events_part} )" %></h4>
 
-          <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0">
+          <p style="margin-bottom: 0">
             <%= @num_future_events_part.zero? ? "No scheduled events" : "Future Events ( #{@num_future_events_part} )" %>
           </p>
         </div>
       </div>
     </div>
 
-    <div style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); position: sticky; top: 90px">
+    <div class="gray-border sticky-top">
       <div id="events_calendar">
         <%= render partial: "calendar" %>
       </div>
@@ -48,35 +42,35 @@
     </div>
   </div>
 
-  <div style="width: 520px; min-width: 520px; margin: 0 10px">
+  <div class="feed-container">
     <div id="items-list">
       <%= render partial: "feed_item", collection: @feed_items %>
     </div>
     <%= will_paginate @feed_items %>
   </div>
 
-  <div style="width: 200px; min-width: 200px; height: fit-content; margin: 0 10px; position: sticky; top: 90px">
-    <div style="padding: 10px; margin-bottom: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
-      <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px">Sugestions</h4>
+  <div class="sugestions-box sticky-top">
+    <div class="gray-border" style="padding: 10px; margin-bottom: 10px">
+      <h4>Sugestions</h4>
 
       <% @org_recommended.each do |org| %>
         <div>
-          <p style="font-size: 13px; text-indent: 5px; margin-bottom: 0"><%= org.name %></p>
-          <p style="font-size: 12px; text-indent: 8px; margin-bottom: 10px">Environmental</p>
+          <h6><%= org.name %></h6>
+          <p style="margin-bottom: 10px">Environmental</p>
         </div>
       <% end %>
       <a href="#">View all</a>
     </div>
 
-    <div style="padding: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
-      <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px">Events near you</h4>
+    <div class="gray-border" style="padding: 10px">
+      <h4>Events near you</h4>
 
       <% @events_near.each do |event| %>
         <div style="margin-bottom: 16px">
-          <p style="font-size: 13px; font-weight: 600; margin-bottom: 0"><%= event.title %></p>
-          <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0"><%= event.organization.name %></p>
-          <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0"><%= event.location %></p>
-          <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0"><%= event.date.strftime("%d %b, %Y (%l%p)") %></p>
+          <h6><%= event.title %></h6>
+          <p><%= event.organization.name %></p>
+          <p><%= event.location %></p>
+          <p><%= event.date.strftime("%d %b, %Y (%l%p)") %></p>
         </div>
       <% end %>
     </div>

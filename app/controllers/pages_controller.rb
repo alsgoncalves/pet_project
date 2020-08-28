@@ -7,7 +7,7 @@ class PagesController < ApplicationController
   end
 
   def feed
-    # User Info Box
+    # User Box
     @user_name = "#{current_user.first_name} #{current_user.last_name}"
 
     org_followed = current_user.favourites.map(&:organization)
