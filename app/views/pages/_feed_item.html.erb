@@ -1,6 +1,8 @@
 <div class="feed-item-container">
+  <!-- Item Headers -->
   <div class="feed-item-headers">
-    <img src="<%= cl_image_path feed_item.organization.avatar.key, height: 1000, width: 1000, crop: :fill %>" alt="organization avatar" class="avatar-square">
+    <img src="<%= cl_image_path feed_item.organization.avatar.key, height: 1000, width: 1000, crop: :fill %>"
+      alt="organization avatar" class="avatar-square">
 
     <div style="margin-left: 10px">
       <h6><%= feed_item.organization.name %></h6>
@@ -8,27 +10,37 @@
     </div>
   </div>
 
+  <!-- The content displayed will depend if the item is a Post or an Event -->
+  <!-- If the item is a Post... -->
   <% if feed_item.is_a? Post %>
+    <!-- Post Content -->
     <div class="feed-item-content">
       <p><%= feed_item.description %></p>
     </div>
 
+    <!-- A Post can have multiple images -->
+    <!-- If it has one image then just display it -->
     <% if feed_item.images.size == 1 %>
-      <img src="<%= cl_image_path feed_item.images.first.key %>" alt="post image" class="d-block w-100" style="margin-bottom: -1px">
+      <img src="<%= cl_image_path feed_item.images.first.key %>" alt="post image"
+        class="d-block w-100" style="margin-bottom: -1px">
 
-    <!-- Carroussel of Post images -->
+    <!-- If it has more than one image then display them using a Carousel -->
     <% elsif feed_item.images.size > 1 %>
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-bottom: -1px">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
+        style="margin-bottom: -1px">
         <ol class="carousel-indicators">
           <% feed_item.images.size.times do |i| %>
-            <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>" class="<%= "active" if i.zero? %>"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>"
+              class="<%= "active" if i.zero? %>">
+            </li>
           <% end %>
         </ol>
 
         <div class="carousel-inner">
           <% feed_item.images.each_with_index do |image, index| %>
             <div class="carousel-item <%= "active" if index.zero? %>">
-              <img src="<%= cl_image_path image.key %>" alt="<%= index.ordinalize %> post image" class="d-block w-100">
+              <img src="<%= cl_image_path image.key %>" alt="<%= index.ordinalize %> post image"
+                class="d-block w-100">
             </div>
           <% end %>
         </div>
@@ -45,6 +57,7 @@
       </div>
     <% end %>
 
+    <!-- Post Actions -->
     <div class="feed-item-actions">
       <%= link_to "#" do %>
         <i class="fas fa-share"></i>
@@ -57,7 +70,9 @@
       <% end %>
     </div>
 
+  <!-- If it is an Event... -->
   <% elsif feed_item.is_a? Event %>
+    <!-- Event Content -->
     <div class="feed-item-content">
       <h5><%= feed_item.title %></h5>
 
@@ -79,6 +94,7 @@
       <p><%= feed_item.description %></p>
     </div>
 
+    <!-- Event Actions -->
     <div class="feed-item-actions">
       <%= link_to "#" do %>
         <i class="fas fa-hand-paper"></i>
