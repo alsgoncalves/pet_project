@@ -1,20 +1,27 @@
+<!--
+  Call the gem "gon" in order to be able to call the Controller variable "calendar_events" from the
+  JS variable "eventsToDisplay" in the JS funtion "calendarPopUp"
+ -->
 <%= include_gon %>
 
 <div class="feed-page-container">
+  <!-- User Box -->
   <div class="user-box">
     <div class="gray-border" style="margin-bottom: 10px">
+      <!-- User Info -->
       <div class="user-box-headers">
         <%= avatar_large(current_user) %>
         <h3><%= @user_name %></h3>
       </div>
 
+      <!-- User Stats -->
       <div class="user-box-info">
+        <!-- Stats Organizations Followed -->
         <div style="margin-bottom: 12px">
           <h4>My Organizations <%= @num_org_followed.zero? ? "" : "( #{@num_org_followed} )" %></h4>
 
           <% if @num_org_followed.zero? %>
             <p>No Organizations followed</p>
-
           <% else %>
             <% @top_categories.each_with_index do |array, index| %>
               <p><%= "#{index + 1}. #{array.first} ( #{array.second} )" %></p>
@@ -22,34 +29,43 @@
           <% end %>
         </div>
 
+        <!-- Stats Events Participated -->
         <div>
           <h4>My Events <%= @num_events_part.zero? ? "" : "( #{@num_events_part} )" %></h4>
 
           <p style="margin-bottom: 0">
-            <%= @num_future_events_part.zero? ? "No scheduled events" : "Future Events ( #{@num_future_events_part} )" %>
+            <%= @num_future_events_part.zero? ?
+              "No scheduled events" :
+              "Future Events ( #{@num_future_events_part} )"
+            %>
           </p>
         </div>
       </div>
     </div>
 
+    <!-- Calendar -->
     <div class="gray-border sticky-top">
       <div id="events_calendar">
         <%= render partial: "calendar" %>
       </div>
 
-      <div id="content-event-popup" style="visibility: hidden">
-      </div>
+      <!-- Calendar Pop-up -->
+      <div id="content-event-popup" style="visibility: hidden"></div>
     </div>
   </div>
 
+  <!-- Feed Posts -->
   <div class="feed-container">
     <div id="items-list">
       <%= render partial: "feed_item", collection: @feed_items %>
     </div>
+
     <%= will_paginate @feed_items %>
   </div>
 
+  <!-- Sugestions Box -->
   <div class="sugestions-box sticky-top">
+    <!-- Sugestions Organizations -->
     <div class="gray-border" style="padding: 10px; margin-bottom: 10px">
       <h4>Sugestions</h4>
 
@@ -59,9 +75,11 @@
           <p style="margin-bottom: 10px">Environmental</p>
         </div>
       <% end %>
+
       <a href="#">View all</a>
     </div>
 
+    <!-- Sugestions Events -->
     <div class="gray-border" style="padding: 10px">
       <h4>Events near you</h4>
 

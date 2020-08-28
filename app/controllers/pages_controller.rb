@@ -30,6 +30,8 @@ class PagesController < ApplicationController
 
 
     # Calendar pop-up box
+    # Add the gem "gon" in order to be able to call this variable from the JS variable
+    # "eventsToDisplay" in the JS funtion "calendarPopUp"
     gon.calendar_events = calendar_top_events(events_followed: events_followed,
                                               events_part: @events_part,
                                               top_num: 3)

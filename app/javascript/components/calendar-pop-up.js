@@ -33,7 +33,7 @@ function calendarPopUp() {
       "July", "Aug", "Sept", "Oct", "Nov", "Dec"
     ];
 
-  // Import variable from the Rails Controller
+  // Use the gem "gon" in order to be able call the Pages Controller variable "calendar_events"
   let eventsToDisplay = gon.calendar_events;
 
   function PopulateEventInfo(day, month, year) {
