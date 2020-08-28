@@ -1,155 +1,96 @@
-<div style="display: flex; justify-content: center; padding: 20px 10px; margin-top: 70px">
-  <div style="width: 240px; min-width: 240px; margin: 0 10px">
-    <div style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); margin-bottom: 10px">
-      <div style="display: flex; flex-direction: column; align-items: center; padding: 10px; border-bottom: 1px solid rgb(180, 180, 180)">
+<!--
+  Call the gem "gon" in order to be able to call the Controller variable "calendar_events" from the
+  JS variable "eventsToDisplay" in the JS funtion "calendarPopUp"
+ -->
+<%= include_gon %>
+
+<div class="feed-page-container">
+  <!-- User Box -->
+  <div class="user-box">
+    <div class="gray-border" style="margin-bottom: 10px">
+      <!-- User Info -->
+      <div class="user-box-headers">
         <%= avatar_large(current_user) %>
-        <h3 style="font-size: 16px; margin: 12px 0 0"><%= @user_name %></h3>
+        <h3><%= @user_name %></h3>
       </div>
 
-      <div style="padding: 10px; border-bottom: 1px solid rgb(180, 180, 180)">
+      <!-- User Stats -->
+      <div class="user-box-info">
+        <!-- Stats Organizations Followed -->
         <div style="margin-bottom: 12px">
-          <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px">
-            My Organizations <%= @num_org_followed.zero? ? "" : "( #{@num_org_followed} )" %>
-          </h4>
+          <h4>My Organizations <%= @num_org_followed.zero? ? "" : "( #{@num_org_followed} )" %></h4>
 
           <% if @num_org_followed.zero? %>
-            <p style="font-size: 12px; text-indent: 5px; margin-bottom: 4px">No Organizations followed</p>
-
+            <p>No Organizations followed</p>
           <% else %>
             <% @top_categories.each_with_index do |array, index| %>
-              <p style="font-size: 12px; text-indent: 5px; margin-bottom: 4px">
-                <%= "#{index + 1}. #{array.first} ( #{array.second} )" %>
-              </p>
+              <p><%= "#{index + 1}. #{array.first} ( #{array.second} )" %></p>
             <% end %>
           <% end %>
         </div>
 
+        <!-- Stats Events Participated -->
         <div>
-          <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px">
-            My Events <%= @num_my_participations.zero? ? "" : "( #{@num_my_participations} )" %>
-          </h4>
+          <h4>My Events <%= @num_events_part.zero? ? "" : "( #{@num_events_part} )" %></h4>
 
-          <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0">
-            <%= @num_my_future_participations.zero? ? "No scheduled events" : "Future Events ( #{@num_my_future_participations} )" %>
+          <p style="margin-bottom: 0">
+            <%= @num_future_events_part.zero? ?
+              "No scheduled events" :
+              "Future Events ( #{@num_future_events_part} )"
+            %>
           </p>
         </div>
       </div>
     </div>
 
-    <div style="border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180); position: sticky; top: 90px">
+    <!-- Calendar -->
+    <div class="gray-border sticky-top">
       <div id="events_calendar">
         <%= render partial: "calendar" %>
       </div>
 
-      <div id="content-event-popup">
-      </div>
+      <!-- Calendar Pop-up -->
+      <div id="content-event-popup" style="visibility: hidden"></div>
     </div>
   </div>
 
-  <div style="width: 520px; min-width: 520px; margin: 0 10px">
+  <!-- Feed Posts -->
+  <div class="feed-container">
     <div id="items-list">
       <%= render partial: "feed_item", collection: @feed_items %>
     </div>
+
     <%= will_paginate @feed_items %>
   </div>
 
-  <div style="width: 200px; min-width: 200px; height: fit-content; margin: 0 10px; position: sticky; top: 90px">
-    <div style="padding: 10px; margin-bottom: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
-      <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px">Sugestions</h4>
+  <!-- Sugestions Box -->
+  <div class="sugestions-box sticky-top">
+    <!-- Sugestions Organizations -->
+    <div class="gray-border" style="padding: 10px; margin-bottom: 10px">
+      <h4>Sugestions</h4>
 
       <% @org_recommended.each do |org| %>
         <div>
-          <p style="font-size: 13px; text-indent: 5px; margin-bottom: 0"><%= org.name %></p>
-          <p style="font-size: 12px; text-indent: 8px; margin-bottom: 10px">Environmental</p>
+          <h6><%= org.name %></h6>
+          <p style="margin-bottom: 10px">Environmental</p>
         </div>
       <% end %>
+
       <a href="#">View all</a>
     </div>
 
-    <div style="padding: 10px; border: 1px solid rgb(180, 180, 180); box-shadow: 0 0 2px rgb(180, 180, 180)">
-      <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px">Events near you</h4>
+    <!-- Sugestions Events -->
+    <div class="gray-border" style="padding: 10px">
+      <h4>Events near you</h4>
 
       <% @events_near.each do |event| %>
         <div style="margin-bottom: 16px">
-          <p style="font-size: 13px; font-weight: 600; margin-bottom: 0"><%= event.title %></p>
-          <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0"><%= event.organization.name %></p>
-          <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0"><%= event.location %></p>
-          <p style="font-size: 12px; text-indent: 5px; margin-bottom: 0"><%= event.date.strftime("%d %b, %Y (%l%p)") %></p>
+          <h6><%= event.title %></h6>
+          <p><%= event.organization.name %></p>
+          <p><%= event.location %></p>
+          <p><%= event.date.strftime("%d %b, %Y (%l%p)") %></p>
         </div>
       <% end %>
     </div>
   </div>
 </div>
-
-<script>
-  const monthNames =
-    [
-      "Jan", "Feb", "Mar", "Apr", "May", "June",
-      "July", "Aug", "Sept", "Oct", "Nov", "Dec"
-    ];
-
-  let eventsToDisplay = JSON.parse(`<%= @calendar_events.to_json.html_safe %>`);
-
-  function popUpEventInfo(day, month, year) {
-    // Create the layout of the pop-up box
-    let selectedDateEvents = eventsToDisplay[`${zeroPaddedNumber(year, 4)}-${zeroPaddedNumber(month)}-${zeroPaddedNumber(day)}`]
-    let boxContent = document.getElementById("content-event-popup");
-
-    boxContent.innerHTML = `<div id="headers-event-popup">
-                              <h6 id="date-event-popup">${monthNames[month - 1]} ${day}</h6>
-                              <ul class="nav nav-tabs"></ul>
-                            </div>
-                            <div class="tab-content"></div>`;
-
-    // The pop-up box format will depend if it a certain date has events or not
-    if (selectedDateEvents == null || selectedDateEvents.length == 0) {
-    
-      document.querySelector("div#content-event-popup div.tab-content").innerHTML = '<p>Nothing happening this day</p>';
-
-    } else {
-    
-      for (let i = 0; i < selectedDateEvents.length; i++) {
-        let selectedEvent = selectedDateEvents[i];
-
-        // Create the navigation headers
-        let listLi = document.createElement('li');
-        if (i == 0) listLi.className = 'active';
-
-        let anchor = document.createElement('a');
-        anchor.setAttribute('data-toggle', 'tab');
-        anchor.setAttribute('href', `#event${i + 1}`);
-        anchor.innerHTML = `<i class="${selectedEvent.org_cat_icon}"></i>`;
-
-        listLi.appendChild(anchor);
-        document.querySelector("div#content-event-popup ul.nav.nav-tabs").appendChild(listLi);
-
-        // Create the content
-        let contentDiv = document.createElement('div');
-        contentDiv.id = `event${i + 1}`;
-        contentDiv.className = (i == 0 ? "tab-pane fade active in show" : "tab-pane fade");
-
-        let contentParaTitle = document.createElement('p');
-        contentParaTitle.innerHTML = selectedEvent.title;
-        contentDiv.appendChild(contentParaTitle);
-
-        let contentParaLocation = document.createElement('p');
-        contentParaLocation.innerHTML = selectedEvent.location;
-        contentDiv.appendChild(contentParaLocation);
-
-        let contentParaTime = document.createElement('p');
-        contentParaTime.innerHTML = selectedEvent.time;
-        contentDiv.appendChild(contentParaTime);
-
-        let contentParaPart = document.createElement('p');
-        contentParaPart.innerHTML = selectedEvent.part_count;
-        contentDiv.appendChild(contentParaPart);
-
-        document.querySelector("div#content-event-popup div.tab-content").appendChild(contentDiv);
-      }
-    }
-  }
-
-  function zeroPaddedNumber(num, digits = 2) {
-    return ("0000" + num).slice(-digits);
-  }
-</script>

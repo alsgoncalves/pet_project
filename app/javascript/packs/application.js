@@ -32,6 +32,7 @@ import "bootstrap";
 import { scrollPageEnd } from '../components/scroll-page-end';
 import { navSlide } from '../components/navbar';
 import { NavbarOnScroll } from '../components/navbar';
+import { calendarPopUp } from '../components/calendar-pop-up';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -39,6 +40,7 @@ document.addEventListener('turbolinks:load', () => {
   scrollPageEnd();
   NavbarOnScroll();
   navSlide();
+  calendarPopUp();
   (function($) {
 
     "use strict";

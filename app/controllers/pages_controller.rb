@@ -7,48 +7,63 @@ class PagesController < ApplicationController
   end
 
   def feed
-    # User Info Box
+    # User Box
     @user_name = "#{current_user.first_name} #{current_user.last_name}"
 
-    org_followed = current_user.favourites.map { |fav| fav.organization }
+    org_followed = current_user.favourites.map(&:organization)
     @num_org_followed = org_followed.size
 
-    # Create an array of arrays where the first element is the name of the category and the second
-    # is the number of organizations followed in that category; sorted by the second argument (DESC)
-    org_followed_by_category = org_followed.group_by(&:category)
-                                            .map { |key, value| [key.name, value.size] }
-                                            .sort_by { |arr| - arr.last }
-    num_top_categories = 3
-    @top_categories = org_followed_by_category.first(num_top_categories)
+    @top_categories = top_categories(orgs: org_followed, top_num: 3)
 
-    @my_participations = current_user.participations.map(&:event)
-    @num_my_participations = @my_participations.size
-    @num_my_future_participations = @my_participations.reject { |event| event.date < DateTime.tomorrow.beginning_of_day }.size
+    @events_part = current_user.participations.map(&:event)
+    @num_events_part = @events_part.size
+    @num_future_events_part = @events_part.select { |event| event.date >= DateTime.tomorrow.beginning_of_day }
+                                           .size
 
 
     # User Feed
-    posts_followed = org_followed.map { |org| org.posts }.flatten
-    events_followed = org_followed.map { |org| org.events }.flatten
+    posts_followed = org_followed.map(&:posts).flatten
+    events_followed = org_followed.map(&:events).flatten
 
-    @feed_items = (posts_followed + events_followed).sort_by { |x| x.created_at }.paginate(page: params[:page], per_page: 10)
+    @feed_items = (posts_followed + events_followed).sort_by(&:created_at)
+                                                    .paginate(page: params[:page], per_page: 10)
+
+
+    # Calendar pop-up box
+    # Add the gem "gon" in order to be able to call this variable from the JS variable
+    # "eventsToDisplay" in the JS funtion "calendarPopUp"
+    gon.calendar_events = calendar_top_events(events_followed: events_followed,
+                                              events_part: @events_part,
+                                              top_num: 3)
 
 
     # Sugestions Box
+    # Still not implemented: missing the locations being quantified with coordinates
     @org_recommended = (Organization.all - org_followed).first(3)
-
     @events_near = events_followed.first(3)
 
 
-    # Calendar side box
-    @calendar_events = calendar_top_events(events_followed, @my_participations)
-
+    # In order for the AJAX requests to work
     respond_to do |format|
       format.html
       format.js
     end
   end
 
-  def calendar_top_events(events_followed, my_events)
+  # Get the top x categories in terms of num of orgs it contains; the result is an array with x arrays
+  # where the first element is the name of the category and the second is the num of orgs it contains
+  def top_categories(orgs:, top_num:)
+    return orgs.group_by(&:category)
+               .map { |k, v| [k.name, v.size] }
+               .sort_by { |arr| - arr.last }
+               .first(top_num)
+  end
+
+  # For each day, in the period of one month back and one month fowards in time, get the top x events;
+  # first get the events where the user will be participating and fill the rest with events of orgs
+  # the user follows
+  def calendar_top_events(events_followed:, events_part:, top_num:)
+    other_events = events_followed - events_part
     result = {}
 
     if params[:start_date].present?
@@ -58,20 +73,26 @@ class PagesController < ApplicationController
     end
 
     date_counter = start_date.prev_month
-    other_events = events_followed - my_events
 
     while date_counter <= start_date.next_month
-      arr = my_events.select {|x| x.date.beginning_of_day == date_counter }.first(3).map { |event| transform_event(event, true)}
-      arr << other_events.select {|x| x.date.beginning_of_day == date_counter }.first(3 - arr.size).map { |event| transform_event(event, false)}
+      helper_arr = events_part.select { |event| event.date.beginning_of_day == date_counter }
+                              .first(top_num)
+                              .map { |event| transform_event_format(event: event, participating: true) }
 
-      result[date_counter.strftime('%Y-%m-%d')] = arr.flatten
+      helper_arr << other_events.select { |event| event.date.beginning_of_day == date_counter }
+                                .first(top_num - helper_arr.size)
+                                .map { |event| transform_event_format(event: event, participating: false) }
+
+      result[date_counter.strftime('%Y-%m-%d')] = helper_arr.flatten
       date_counter += 1
     end
 
     return result
   end
 
-  def transform_event(event, participation)
+  # Transform each event, in the array of events given, into an hash with the relevant key/value
+  # properties to be transmited to the view
+  def transform_event_format(event:, participating:)
     return {
       title: event.title,
       org_name: event.organization.name,
@@ -79,7 +100,7 @@ class PagesController < ApplicationController
       location: event.location,
       time: event.date,
       part_count: event.part_count,
-      participating: participation
+      participating: participating
     }
   end
 end

@@ -2,11 +2,12 @@
 <!-- otherwise add more items to the feed -->
 <% if params["start_date"].present? %>
   $("#events_calendar").html("<%= j render partial: "calendar" %>");
-  eventsToDisplay = JSON.parse(`<%= @calendar_events.to_json.html_safe %>`);
-<% else %>
-  $("#items-list").append('<%= j render partial: "item", collection: @items %>');
+  calendarPopUp();
 
-  <% if @items.next_page %>
-    $('.pagination').replaceWith('<%= j will_paginate(@items) %>');
+<% else %>
+  $("#items-list").append('<%= j render partial: "feed_item", collection: @feed_items %>');
+
+  <% if @feed_items.next_page %>
+    $('.pagination').replaceWith('<%= j will_paginate(@feed_items) %>');
   <% end %>
 <% end %>

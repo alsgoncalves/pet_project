@@ -76,3 +76,6 @@ gem 'will_paginate'
 
 # Calendar
 gem "simple_calendar", "~> 2.0"
+
+# To use controller variables as JS variables
+gem 'gon'
