@@ -1,19 +1,21 @@
 <div class="container p-5 mt-5">
   <div class="row">
     <div class="col-lg-10">
-      <h2>Login</h2>
-      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <%= f.input :email,
+      <div class="form-login">
+        <h2>Login</h2>
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= f.input :email, class: "input-text-form",
                       required: false,
                       autofocus: true,
                       input_html: { autocomplete: "email" } %>
-      <%= f.input :password,
-                  required: false,
-                  input_html: { autocomplete: "current-password" } %>
-      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-        <%= f.button :submit, "Login", class: "form-btn" %>
-      <% end %>
-      <%= render "devise/shared/links" %>
+          <%= f.input :password, class: "input-text-form",
+                      required: false,
+                      input_html: { autocomplete: "current-password" } %>
+          <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+          <%= f.button :submit, "Login", class: "button-login" %>
+        <% end %>
+        <%= render "devise/shared/links" %>
+      </div>
     </div>
   </div>
 </div>

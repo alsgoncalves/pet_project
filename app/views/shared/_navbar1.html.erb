@@ -12,7 +12,16 @@
       </li>
      </ul>
      <ul class="nav-login">
-      <% if current_user.present? %>
+      <% def new_user_session_path
+           # code here
+         end
+         def new_user_registration_path
+           # code here
+         end
+         def destroy_user_session_path
+           # code here
+         end
+         if current_user.present? %>
         <li class="nav-avatar">
           <%= avatar_small(current_user) %>
             <ul class="avatar-links">

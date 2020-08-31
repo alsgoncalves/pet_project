@@ -1,3 +1,4 @@
+
 function calendarPopUp() {
   let calendarDays = document.querySelectorAll("table.table-striped tbody tr td.day");
 
@@ -11,7 +12,7 @@ function calendarPopUp() {
 
       // Make the pop-up box visible
       let eventPopUp = document.getElementById("content-event-popup");
-      if (eventPopUp.style.visibility == "hidden") {
+      if (eventPopUp.style.visibility === "hidden") {
         eventPopUp.style.visibility = "visible";
         eventPopUp.style.opacity = "1";
       }
@@ -54,7 +55,7 @@ function calendarPopUp() {
     let eventContent = document.querySelector("div#content-event-popup div.tab-content");
 
     // The pop-up box format will depend on the presence, or not, of events on the selected date
-    if (selectedDateEvents == null || selectedDateEvents.length == 0) {
+    if (selectedDateEvents == null || selectedDateEvents.length === 0) {
       eventContent.innerHTML = '<p>Nothing happening this day</p>';
 
     } else {
@@ -63,10 +64,10 @@ function calendarPopUp() {
 
         // Create the navigation headers
         let listLi = document.createElement('li');
-        listLi.className = ( i == 0 ? 'nav-item active': 'nav-item');
+        listLi.className = ( i === 0 ? 'nav-item active': 'nav-item');
 
         let anchor = document.createElement('a');
-        anchor.className = ( i == 0 ? 'nav-link active show': 'nav-link');
+        anchor.className = ( i === 0 ? 'nav-link active show': 'nav-link');
         anchor.setAttribute('data-toggle', 'tab');
         anchor.setAttribute('href', `#event${i + 1}`);
         anchor.innerHTML = `<i class="${selectedEvent.org_cat_icon}"></i>`;
@@ -77,7 +78,7 @@ function calendarPopUp() {
         // Create the Events content
         let contentDiv = document.createElement('div');
         contentDiv.id = `event${i + 1}`;
-        contentDiv.className = (i == 0 ? "tab-pane fade active in show" : "tab-pane fade");
+        contentDiv.className = (i === 0 ? "tab-pane fade active in show" : "tab-pane fade");
 
         contentDiv.appendChild(paraCreator(selectedEvent.title))        // Appends the title
         contentDiv.appendChild(paraCreator(selectedEvent.location));    // Appends the location
@@ -89,7 +90,7 @@ function calendarPopUp() {
     }
   }
 
-  // If a number has less digits than a certain number, then padd it with zeros
+  // If a number has less digits than a certain number, then pad it with zeros
   function zeroPaddedNumber(num, digits = 2) {
     return ("0000" + num).slice(-digits);
   }

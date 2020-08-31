@@ -6,7 +6,7 @@ const navSlide = () => {
   const avatarLinks = document.querySelector('.avatar-links');
 
   function burgerPopUpBehaviour() {
-    // Toogle Nav
+    // toggle Nav
     nav.classList.toggle('nav-active');
 
     // Animated Links
@@ -15,29 +15,32 @@ const navSlide = () => {
         link.style.animation = ''
       } else {
         link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.5}s`;
-      };
+      }
     });
 
     // Burger animation
     burger.classList.toggle('cross');
-  };
+  }
 
-  const burgerClick = burger.addEventListener('click', () => {
+  burger.addEventListener('click', () => {
     if (avatarLinks.classList.contains("avatar-links-active")) {
       avatarLinks.classList.remove("avatar-links-active");
-    };
+    }
 
     burgerPopUpBehaviour();
   });
 
-  const avatarClick = avatar.addEventListener('click', () => {
-    if (nav.classList.contains("nav-active")) {
-      burgerPopUpBehaviour();
-    };
+  if (avatar){
+    avatar.addEventListener('click', () => {
+      if (nav.classList.contains("nav-active")) {
+        burgerPopUpBehaviour();
+      }
 
-    avatarLinks.classList.toggle('avatar-links-active');
-  });
-};
+      avatarLinks.classList.toggle('avatar-links-active');
+    });
+  }
+
+}
 
 const NavbarOnScroll = () => {
   window.addEventListener('scroll', () => {
